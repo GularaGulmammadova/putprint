@@ -8,98 +8,216 @@
   
   .page-title {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 10px;
   }
   
   .subtitle {
-    font-size: 14px;
-    color: #666;
+    font-size: 16px;
+    color: #474646;
     margin-bottom: 20px;
   }
   
   .search-bar input {
     width: 400px;
     padding: 10px;
-    border-radius: 25px;
-    border: 1px solid #ccc;
+    border-radius: 30px;
+    border: 1px solid #000;
     font-size: 14px;
     outline: none;
     text-align: center;
+    background-color: #E0E0E0;
+  }
+
+  .search-bar::placeholder{
+    font-size: 16px;
+    text-align: center;
+    color: #B1B1B1;
+  }
+
+  .search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 400px; 
+    margin: 20px auto; 
   }
   
-  .product-grid {
+  .search-icon {
+    position: absolute;
+    left: 25px;
+    top: 8px;
+    color: #000;
+    transform: translateX(-50%);
+    font-size: 24px;
+  }  
+  .product-cards {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 20px;
+    margin-top: 50px;
   }
   
   .product-card {
     background-color: #fff;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 299px;
+    height: 390px;
+    margin-left: 80px;
+  }
+
+  .product-card img {
+    width: 247px;
+    height: 247px;
+    object-fit: contain;
+  }
+
+  .product-card .size {
+    display: flex;
+    gap: 10px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+
+  .product-card .size span{
+    font-weight: 400;
+    font-size: 16px;
   }
   
-  
-  .product-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+  .product-card .colors {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .product-card .colors .color{
+    width: 28px;
+    height: 14px;
+    border-radius: 13px;
+    border: 1px solid #ececec15;
   }
   
-  .product-name {
+.product-card .detail  {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card .hover-img {
+  opacity: 0;
+  position: absolute;
+  top: -23%;
+  left: -1px;
+  width: 100%;
+  height: 100%; 
+  z-index: -1;
+  transition: opacity 0.4s ease-out;
+}
+
+.product-card:hover .hover-img {
+  opacity: 1;
+  z-index: 1;
+}
+
+.product-card img {
+  width: 100%; 
+  height: auto;
+}
+
+.product-card .detail img {
+    width: 20px;
+    height: 20px;
+}
+
+.product-card .material  img{
+    width: 20px;
+    height: 20px;
+}
+
+.product-card .material{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.product-card .material span{
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.product-card .price {
+    display: flex;
     font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0;
-  }
-  
-  .product-colors {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+  .product-card .product-name {
+    display: flex;
+    transform: translateX(-45%);
+    font-size: 18px;
     margin-bottom: 10px;
+    font-weight: 400;
   }
   
-  .color {
+
+  /* .color {
     display: inline-block;
     width: 15px;
     height: 15px;
     border-radius: 50%;
     margin-right: 5px;
   }
-  
-  .product-details {
+   */
+  /* .product-details {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
     font-size: 14px;
-  }
+  } */
   
-  .size-range {
-    font-size: 14px;
-  }
   
-  .thread {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .product-price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  
-  .design-button {
-    width: 100%;
+  .product-card .design-button {
+    width: 148px;
+    height: 37px;
     padding: 10px;
-    border-radius: 25px;
+    border-radius: 15px;
     border: none;
-    background-color: #ff8c00;
+    background-color: #FF810C;
     color: #fff;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
   }
-  
+
+
+  @media (max-width: 992px) {
+    .product-cards {
+      grid-template-columns: repeat(2,1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .product-cards {
+      grid-template-columns: repeat(1,1fr);
+    }
+
+    .product-card{
+      flex-direction: column;
+      align-items: center;
+
+    }
+  }

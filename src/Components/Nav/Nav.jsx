@@ -37,9 +37,9 @@ const Nav = () => {
       <div className="language-selector">
         Az <span className="arrow"><IoIosArrowDown/></span>
       </div>
-      <div className="corporate-order">
+      <div className="corporate-order">        
+      <span className="user-icon"><FaRegUserCircle/></span>
         Korporativ sifariş
-        <span className="user-icon"><FaRegUserCircle/></span>
       </div>
     </div>
   </header>

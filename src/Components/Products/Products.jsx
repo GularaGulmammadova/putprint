@@ -1,95 +1,348 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import './Products.css'
+import React from "react";
+import "./Products.css";
 import { CiSearch } from "react-icons/ci";
-import white_tshirt from './../../site assets/t-shirt oversize/white/ui kart/tshirta.png'
-import black_tshirt from './../../site assets/t-shirt oversize/black/ui kart/tshirt.png'
+import white_tshirt from "./../../site assets/t-shirt oversize/white/ui kart/tshirta.png";
+import black_tshirt from "./../../site assets/t-shirt oversize/black/ui kart/tshirt.png";
+import hoodie from "./../../site assets/hoody/white/ui kart/hoodie_w.png";
+import black_hoodie from './../../site assets/hoody/black/ui kart/hoodie_B.png'
+import sweater from "./../../site assets/sweater/black/ui kart/sweater_b_ui.png";
+import white_sweater from './../../site assets/sweater/white/ui kart/sweater_w_ui.png'
+import cap from "./../../site assets/cap/cap.png";
+import bag from "./../../site assets/eco bag/ui cardd/eco-bag.png";
+import needle from "./../../site assets/logo and icons/needle.png";
+import size from "./../../site assets/logo and icons/size.png";
 
-const Products = () => {    
-const products = [
-    {
-      id: 1,
-      name: "Oversize t-shirt",
-      priceRange: "30-34 ₼",
-      sizes: "S-2XL",
-      colors: ["#000", "#fff"],
-      img: {white_tshirt},
-      thread: "2-3 iplik",
-    },
-    {
-      id: 2,
-      name: "T-shirt",
-      priceRange: "20-24 ₼",
-      sizes: "S-2XL",
-      colors: ["#000", "#fff"],
-      img: {black_tshirt},
-    },
-    {
-      id: 3,
-      name: "Kapşonlu sviter",
-      priceRange: "35-44 ₼",
-      sizes: "S-2XL",
-      colors: ["#000", "#fff"],
-      img: "hoodie.png",
-      thread: "2-3 iplik",
-    },
-    {
-      id: 4,
-      name: "Sviter",
-      priceRange: "30-39 ₼",
-      sizes: "S-2XL",
-      colors: ["#000", "#fff"],
-      img: "sweater.png",
-      thread: "2-3 iplik",
-    },
-    {
-      id: 5,
-      name: "Kepka",
-      priceRange: "10-16 ₼",
-      sizes: "S-2XL",
-      colors: ["#000", "#fff"],
-      img: "cap.png",
-      thread: "2-3 iplik",
-    },
-    {
-      id: 6,
-      name: "Eko çanta",
-      priceRange: "12-16 ₼",
-      sizes: "S-2XL",
-      colors: ["#000", "#fff"],
-      img: "bag.png",
-    },
-  ];
+const Products = () => {
 
   return (
     <div className="product-grid-container">
-    <div className="page-title">Məhsulu seçin</div>
-    <p className="subtitle">Sizin stiliniz, sizin seçiminiz – Köynəklərdən geyim kolleksiyalarına</p>
-    <div className="search-bar">
-    <CiSearch/><input type="text"  placeholder="Məhsulları, markaları və kateqoriyaları axtarın" />
-    </div>
-
-    <div className="product-grid">
-      {products.map((product) => (
-        <div className="product-card" key={product.id}>
-          <img src={product.img} alt={product.name} className="product-image" />
-          <h3 className="product-name">{product.name}</h3>
-          <div className="product-colors">
-            {product.colors.map((color, index) => (
-              <span key={index} className="color" style={{ backgroundColor: color }}></span>
-            ))}
+      <div className="page-title">Məhsulu seçin</div>
+      <p className="subtitle">
+        Sizin stiliniz, sizin seçiminiz – Köynəklərdən geyim kolleksiyalarına
+      </p>
+      <div className="search-bar">
+       <div className="search-icon">
+        <CiSearch />
+       </div>
+        <input
+          type="text"
+          placeholder="Məhsulları, markaları və kateqoriyaları axtarın"
+        />
+      </div>
+      <div className="product-cards">
+        <div className="product-card">
+          <img src={white_tshirt} alt="" />
+          <img src={black_tshirt} alt="" className="hover-img" />
+          <div className="product-name">Oversize t-shirt</div>
+          <div className="detail">
+            <div className="colors">
+              <div
+              data-color="white"
+                className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                data-color="black"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+            </div>
+            <div className="size">
+              <span>/</span> <img src={size} alt="" />
+              S-2XL
+            </div>
           </div>
-          <div className="product-details">
-            <span className="size-range">{product.sizes}</span>
-            {product.thread && <span className="thread">{product.thread}</span>}
+          <div className="price">
+            <span>30-34₼</span>
+            <button className="design-button">Dizayn et</button>
           </div>
-          <div className="product-price">{product.priceRange}</div>
+        </div>
+        <div className="product-card">
+          <img src={black_tshirt} alt="" />
+          <img src={white_tshirt} alt="" className="hover-img" />
+          <div className="product-name">T-shirt</div>
+          <div className="detail">
+            <div className="colors">
+              <div
+                className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+            </div>
+            <div className="size">
+              <span>/</span> <img src={size} alt="" /> S-2XL
+            </div>
+          </div>
+          <div className="price">
+            <span>20-24₼</span>
+            <button className="design-button">Dizayn et</button>
+          </div>
+        </div>
+        <div className="product-card">
+          <img src={hoodie} alt="" />
+          <img src={black_hoodie} alt="" className="hover-img" />
+          <div className="product-name">Kapşonlu sviter</div>
+          <div className="detail">
+            <div className="colors">
+              <div
+                className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+            </div>
+            <div className="size">
+              <span>/</span> <img src={size} alt="" />
+              S-2XL
+              <div className="material">
+                <span>/</span><img src={needle} alt="" />2-3 iplik
+              </div>
+            </div>
+          </div>
+          <div className="price">
+            <span>35-44₼</span>
+            <button className="design-button">Dizayn et</button>
+          </div>
+        </div>
+        <div className="product-card">
+          <img src={sweater} alt="" />
+          <img src={white_sweater} alt="" className="hover-img" />
+          <div className="product-name">Sviter</div>
+          <div className="detail">
+            <div className="colors">
+              <div
+                className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+            </div>
+            <div className="size">
+              <span>/</span> <img src={size} alt="" /> S-2XL
+              <div className="material">
+                <span>/</span>
+                <img src={needle} alt="" />
+                2-3 iplik
+              </div>
+            </div>
+          </div>
+          <div className="price">
+            <span>30-39₼</span>
+            <button className="design-button">Dizayn et</button>
+          </div>
+        </div>
+        <div className="product-card">
+          <img src={cap} alt="" />
+          <div className="product-name">Kepka</div>
+          <div className="detail">
+            <div className="colors">
+              <div
+                className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+            </div>
+            <div className="size">
+              <span>/</span>
+              <img src={size} alt="" /> S-2XL
+              <div className="material">
+                <span>/</span>
+                <img src={needle} alt="" />
+                2-3 iplik
+              </div>
+            </div>
+          </div>
+          <div className="price">
+            <span>10-16₼</span>
+            <button className="design-button">Dizayn et</button>
+          </div>
+        </div>
+        <div className="product-card">
+          <img src={bag} alt="" />
+          <div className="product-name">Eko çanta</div>
+          <div className="detail">
+            <div className="colors">
+              <div
+                className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+            </div>
+            <div className="size">
+              <span>/</span> <img src={size} alt="" />
+              S-2XL
+            </div>
+          </div>
+          <div className="price">
+            <span>12-16₼</span>
+            <button className="design-button">Dizayn et</button>
+          </div>
+        </div>
+      </div>
+      {/* <div className="product-cards">
+        <div className="product-card">
+        <div className="product-img">
+          <img src={white_tshirt} alt="" />
+        </div>
+        <div className="product-name">Oversize t-shirt</div>
+        <div className="product-colors">
+        <div className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+          <div className="product-detail">
+            <div className="size">
+            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
+            </div>
+          </div>
+          <div className="product-desc">
+            <p className="price">30-34</p>
+          </div>
           <button className="design-button">Dizayn et</button>
         </div>
-      ))}
+      </div>
+      <div className="product-card">
+        <div className="product-img">
+          <img src={white_tshirt} alt="" />
+        </div>
+        <div className="product-name">Oversize t-shirt</div>
+        <div className="product-colors">
+        <div className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+          <div className="product-detail">
+            <div className="size">
+            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
+            </div>
+          </div>
+          <div className="product-desc">
+            <p className="price">30-34</p>
+          </div>
+          <button className="design-button">Dizayn et</button>
+        </div>
+      </div>
+      <div className="product-card">
+        <div className="product-img">
+          <img src={white_tshirt} alt="" />
+        </div>
+        <div className="product-name">Oversize t-shirt</div>
+        <div className="product-colors">
+        <div className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+          <div className="product-detail">
+            <div className="size">
+            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
+            </div>
+          </div>
+          <div className="product-desc">
+            <p className="price">30-34</p>
+          </div>
+          <button className="design-button">Dizayn et</button>
+        </div>
+      </div>
+      <div className="product-card">
+        <div className="product-img">
+          <img src={white_tshirt} alt="" />
+        </div>
+        <div className="product-name">Oversize t-shirt</div>
+        <div className="product-colors">
+        <div className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+          <div className="product-detail">
+            <div className="size">
+            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
+            </div>
+          </div>
+          <div className="product-desc">
+            <p className="price">30-34</p>
+          </div>
+          <button className="design-button">Dizayn et</button>
+        </div>
+      </div>
+      <div className="product-card">
+        <div className="product-img">
+          <img src={white_tshirt} alt="" />
+        </div>
+        <div className="product-name">Oversize t-shirt</div>
+        <div className="product-colors">
+        <div className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+          <div className="product-detail">
+            <div className="size">
+            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
+            </div>
+          </div>
+          <div className="product-desc">
+            <p className="price">30-34</p>
+          </div>
+          <button className="design-button">Dizayn et</button>
+        </div>
+      </div>
+      <div className="product-card">
+        <div className="product-img">
+          <img src={white_tshirt} alt="" />
+        </div>
+        <div className="product-name">Oversize t-shirt</div>
+        <div className="product-colors">
+        <div className="color"
+                style={{ backgroundColor: "#DEDEDE" }}
+              ></div>
+              <div
+                className="color"
+                style={{ backgroundColor: "#000000" }}
+              ></div>
+          <div className="product-detail">
+            <div className="size">
+            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
+            </div>
+            <div className="thread"><span>/</span><img src={needle} alt="" />2-3</div>
+          </div>
+          <div className="product-desc">
+            <p className="price">30-34</p>
+          </div>
+          <button className="design-button">Dizayn et</button>
+        </div>
+      </div>
+      </div> */}
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

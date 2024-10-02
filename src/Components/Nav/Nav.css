@@ -6,8 +6,8 @@
   }
   
   .logo img {
-    width: 40%;
-    height: 100%;
+    width: 181px;
+    height: 35px;
     object-fit: contain;
   }
   
@@ -19,14 +19,14 @@
   
   .nav-item {
     text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    font-weight: 500;
+    color: #161515;
+    font-size: 18px;
+    font-weight: 400;
     /* transition: color 0.3s ease; */
   }
   
   .nav-item.active {
-    color: #ff8c00; 
+    color: #FF810C; 
   }
   
   /* .nav-item:hover {
@@ -54,8 +54,8 @@
   }
   
   .corporate-order {
-    font-size: 16px;
-    color: #333;
+    font-size: 18px;
+    color: #161515;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -63,9 +63,12 @@
   
   .corporate-order .user-icon {
     margin-left: 8px;
-    font-size: 24px;
+    font-size: 20px;
     display: flex;
     align-items: center;
+    width: 32px;
+    height: 32px;
+    color: #333;
   }
   
   /* .language-selector:hover, .corporate-order:hover {
