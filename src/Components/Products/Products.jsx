@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
+ /* eslint-disable no-unused-vars */
 import React from "react";
 import "./Products.css";
 import { CiSearch } from "react-icons/ci";
@@ -17,6 +16,7 @@ import size from "./../../site assets/logo and icons/size.png";
 const Products = () => {
 
   return (
+    <div className="container">
     <div className="product-grid-container">
       <div className="page-title">Məhsulu seçin</div>
       <p className="subtitle">
@@ -60,9 +60,7 @@ const Products = () => {
             <button className="design-button">Dizayn et</button>
           </div>
         </div>
-        <div className="product-card"/>
-          <img src={white_tshirt} alt="" />
-          <img src={black_tshirt} alt="" className="hover-img" />
+        <div className="product-card">
           <img src={black_tshirt} alt=""  className="hover-img"/>
           <img src={white_tshirt} alt="" />
           <hr />
@@ -117,8 +115,6 @@ const Products = () => {
           </div>
         </div>
         <div className="product-card">
-          <img src={white_sweater} alt="" />
-          <img src={sweater} alt="" className="hover-img" />
           <img src={sweater} alt="" className="hover-img"/>
           <img src={white_sweater} alt=""  />
           <hr />
@@ -204,7 +200,8 @@ const Products = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
 
