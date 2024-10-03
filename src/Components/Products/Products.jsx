@@ -35,6 +35,7 @@ const Products = () => {
         <div className="product-card">
           <img src={white_tshirt} alt="" />
           <img src={black_tshirt} alt="" className="hover-img" />
+          <hr />
           <div className="product-name">Oversize t-shirt</div>
           <div className="detail">
             <div className="colors">
@@ -62,6 +63,7 @@ const Products = () => {
         <div className="product-card">
           <img src={black_tshirt} alt="" />
           <img src={white_tshirt} alt="" className="hover-img" />
+          <hr />
           <div className="product-name">T-shirt</div>
           <div className="detail">
             <div className="colors">
@@ -86,6 +88,7 @@ const Products = () => {
         <div className="product-card">
           <img src={hoodie} alt="" />
           <img src={black_hoodie} alt="" className="hover-img" />
+          <hr />
           <div className="product-name">Kapşonlu sviter</div>
           <div className="detail">
             <div className="colors">
@@ -114,6 +117,7 @@ const Products = () => {
         <div className="product-card">
           <img src={sweater} alt="" />
           <img src={white_sweater} alt="" className="hover-img" />
+          <hr />
           <div className="product-name">Sviter</div>
           <div className="detail">
             <div className="colors">
@@ -142,6 +146,7 @@ const Products = () => {
         </div>
         <div className="product-card">
           <img src={cap} alt="" />
+          <hr />
           <div className="product-name">Kepka</div>
           <div className="detail">
             <div className="colors">
@@ -171,6 +176,7 @@ const Products = () => {
         </div>
         <div className="product-card">
           <img src={bag} alt="" />
+          <hr />
           <div className="product-name">Eko çanta</div>
           <div className="detail">
             <div className="colors">
