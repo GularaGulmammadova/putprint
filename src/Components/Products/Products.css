@@ -11,7 +11,7 @@
   margin-bottom: 10px;
 }
 hr {
-  border: none; /* Убираем стандартную границу */
+  border: none; 
   height: 2px;  
   background-color: #ccc; 
   margin: 20px 0; 
