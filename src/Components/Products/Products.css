@@ -12,10 +12,10 @@
 }
 hr {
   border: none; /* Убираем стандартную границу */
-  height: 2px;  /* Задаем высоту */
-  background-color: #ccc; /* Цвет линии */
-  margin: 20px 0; /* Отступы сверху и снизу */
-  width: 100%; /* Делаем ее по ширине контейнера */
+  height: 2px;  
+  background-color: #ccc; 
+  margin: 20px 0; 
+  width: 100%; 
 }
 
 .subtitle {
