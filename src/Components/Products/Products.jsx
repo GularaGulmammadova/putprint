@@ -61,8 +61,8 @@ const Products = () => {
           </div>
         </div>
         <div className="product-card">
-          <img src={black_tshirt} alt="" />
-          <img src={white_tshirt} alt="" className="hover-img" />
+          <img src={black_tshirt} alt=""  className="hover-img"/>
+          <img src={white_tshirt} alt="" />
           <hr />
           <div className="product-name">T-shirt</div>
           <div className="detail">
@@ -115,8 +115,8 @@ const Products = () => {
           </div>
         </div>
         <div className="product-card">
-          <img src={sweater} alt="" />
-          <img src={white_sweater} alt="" className="hover-img" />
+          <img src={sweater} alt="" className="hover-img"/>
+          <img src={white_sweater} alt=""  />
           <hr />
           <div className="product-name">Sviter</div>
           <div className="detail">
