@@ -10,13 +10,6 @@
   font-weight: 500;
   margin-bottom: 10px;
 }
-hr {
-  border: none; /* Убираем стандартную границу */
-  height: 2px;  /* Задаем высоту */
-  background-color: #ccc; /* Цвет линии */
-  margin: 20px 0; /* Отступы сверху и снизу */
-  width: 100%; /* Делаем ее по ширине контейнера */
-}
 
 .subtitle {
   font-size: 16px;
@@ -59,7 +52,7 @@ hr {
 
 .product-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-top: 50px;
 }
@@ -71,16 +64,43 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 299px;
-  height: 390px;
-  margin-left: 80px;
+    margin-left: 15px;
+}
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card .hover-img {
+  width: 100%;
+  height: 180px;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease-out;
+}
+
+.product-card:hover .hover-img {
+  opacity: 1;
+  z-index: 1;
 }
 
 .product-card img {
-  width: 247px;
+  width: 100%;
   height: 180px;
   object-fit: contain;
 }
+
+hr {
+  border: none; 
+  height: 2px; 
+  background-color: #ccc; 
+  margin: 20px 0; 
+  width: 100%; 
+}
+
 
 .product-card .size {
   display: flex;
@@ -115,26 +135,6 @@ hr {
   flex-direction: row;
   gap: 8px;
 }
-
-.product-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.product-card .hover-img {
-  width: 247px;
-  height: 180px;
-  opacity: 0;
-  position: absolute;
-  z-index: -1;
-  transition: opacity 0.4s ease-out;
-}
-
-.product-card:hover .hover-img {
-  opacity: 1;
-  z-index: 1;
-}
-
 
 .product-card .detail img {
   width: 20px;
@@ -212,9 +212,24 @@ hr {
 }
 
 
+@media (max-width: 1200px) {
+  .product-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @media (max-width: 992px) {
   .product-cards {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-card {
+    flex-direction: column;
+    align-items: center;
   }
 }
 

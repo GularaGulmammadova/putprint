@@ -177,8 +177,8 @@ const Products = () => {
         <div className="product-card">
           <img src={bag} alt="" />
           <hr />
-          <div className="product-name">Eko çanta</div>
-          <div className="detail">
+          <div className="product-name" style={{marginBottom: '50px'}}>Eko çanta</div>
+          {/* <div className="detail">
             <div className="colors">
               <div
                 className="color"
@@ -193,7 +193,7 @@ const Products = () => {
               <span>/</span> <img src={size} alt="" />
               S-2XL
             </div>
-          </div>
+          </div> */}
           <div className="price">
             <span>12-16₼</span>
             <button className="design-button">Dizayn et</button>
