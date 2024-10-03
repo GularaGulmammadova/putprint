@@ -60,9 +60,11 @@ const Products = () => {
             <button className="design-button">Dizayn et</button>
           </div>
         </div>
-        <div className="product-card">
+        <div className="product-card"/>
           <img src={white_tshirt} alt="" />
           <img src={black_tshirt} alt="" className="hover-img" />
+          <img src={black_tshirt} alt=""  className="hover-img"/>
+          <img src={white_tshirt} alt="" />
           <hr />
           <div className="product-name">T-shirt</div>
           <div className="detail">
@@ -117,6 +119,8 @@ const Products = () => {
         <div className="product-card">
           <img src={white_sweater} alt="" />
           <img src={sweater} alt="" className="hover-img" />
+          <img src={sweater} alt="" className="hover-img"/>
+          <img src={white_sweater} alt=""  />
           <hr />
           <div className="product-name">Sviter</div>
           <div className="detail">
@@ -177,8 +181,8 @@ const Products = () => {
         <div className="product-card">
           <img src={bag} alt="" />
           <hr />
-          <div className="product-name">Eko çanta</div>
-          <div className="detail">
+          <div className="product-name" style={{marginBottom: '50px'}}>Eko çanta</div>
+          {/* <div className="detail">
             <div className="colors">
               <div
                 className="color"
@@ -193,160 +197,13 @@ const Products = () => {
               <span>/</span> <img src={size} alt="" />
               S-2XL
             </div>
-          </div>
+          </div> */}
           <div className="price">
             <span>12-16₼</span>
             <button className="design-button">Dizayn et</button>
           </div>
         </div>
       </div>
-      {/* <div className="product-cards">
-        <div className="product-card">
-        <div className="product-img">
-          <img src={white_tshirt} alt="" />
-        </div>
-        <div className="product-name">Oversize t-shirt</div>
-        <div className="product-colors">
-        <div className="color"
-                style={{ backgroundColor: "#DEDEDE" }}
-              ></div>
-              <div
-                className="color"
-                style={{ backgroundColor: "#000000" }}
-              ></div>
-          <div className="product-detail">
-            <div className="size">
-            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
-            </div>
-          </div>
-          <div className="product-desc">
-            <p className="price">30-34</p>
-          </div>
-          <button className="design-button">Dizayn et</button>
-        </div>
-      </div>
-      <div className="product-card">
-        <div className="product-img">
-          <img src={white_tshirt} alt="" />
-        </div>
-        <div className="product-name">Oversize t-shirt</div>
-        <div className="product-colors">
-        <div className="color"
-                style={{ backgroundColor: "#DEDEDE" }}
-              ></div>
-              <div
-                className="color"
-                style={{ backgroundColor: "#000000" }}
-              ></div>
-          <div className="product-detail">
-            <div className="size">
-            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
-            </div>
-          </div>
-          <div className="product-desc">
-            <p className="price">30-34</p>
-          </div>
-          <button className="design-button">Dizayn et</button>
-        </div>
-      </div>
-      <div className="product-card">
-        <div className="product-img">
-          <img src={white_tshirt} alt="" />
-        </div>
-        <div className="product-name">Oversize t-shirt</div>
-        <div className="product-colors">
-        <div className="color"
-                style={{ backgroundColor: "#DEDEDE" }}
-              ></div>
-              <div
-                className="color"
-                style={{ backgroundColor: "#000000" }}
-              ></div>
-          <div className="product-detail">
-            <div className="size">
-            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
-            </div>
-          </div>
-          <div className="product-desc">
-            <p className="price">30-34</p>
-          </div>
-          <button className="design-button">Dizayn et</button>
-        </div>
-      </div>
-      <div className="product-card">
-        <div className="product-img">
-          <img src={white_tshirt} alt="" />
-        </div>
-        <div className="product-name">Oversize t-shirt</div>
-        <div className="product-colors">
-        <div className="color"
-                style={{ backgroundColor: "#DEDEDE" }}
-              ></div>
-              <div
-                className="color"
-                style={{ backgroundColor: "#000000" }}
-              ></div>
-          <div className="product-detail">
-            <div className="size">
-            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
-            </div>
-          </div>
-          <div className="product-desc">
-            <p className="price">30-34</p>
-          </div>
-          <button className="design-button">Dizayn et</button>
-        </div>
-      </div>
-      <div className="product-card">
-        <div className="product-img">
-          <img src={white_tshirt} alt="" />
-        </div>
-        <div className="product-name">Oversize t-shirt</div>
-        <div className="product-colors">
-        <div className="color"
-                style={{ backgroundColor: "#DEDEDE" }}
-              ></div>
-              <div
-                className="color"
-                style={{ backgroundColor: "#000000" }}
-              ></div>
-          <div className="product-detail">
-            <div className="size">
-            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
-            </div>
-          </div>
-          <div className="product-desc">
-            <p className="price">30-34</p>
-          </div>
-          <button className="design-button">Dizayn et</button>
-        </div>
-      </div>
-      <div className="product-card">
-        <div className="product-img">
-          <img src={white_tshirt} alt="" />
-        </div>
-        <div className="product-name">Oversize t-shirt</div>
-        <div className="product-colors">
-        <div className="color"
-                style={{ backgroundColor: "#DEDEDE" }}
-              ></div>
-              <div
-                className="color"
-                style={{ backgroundColor: "#000000" }}
-              ></div>
-          <div className="product-detail">
-            <div className="size">
-            <span>/</span><img src={size} alt="" /><p>S-2XL</p>
-            </div>
-            <div className="thread"><span>/</span><img src={needle} alt="" />2-3</div>
-          </div>
-          <div className="product-desc">
-            <p className="price">30-34</p>
-          </div>
-          <button className="design-button">Dizayn et</button>
-        </div>
-      </div>
-      </div> */}
     </div>
   );
 };
