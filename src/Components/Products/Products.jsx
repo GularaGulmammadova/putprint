@@ -68,7 +68,7 @@ const Products = () => {
           </div>
         </div>
         </a>
-        <div className="product-card">
+        <a href="/productdetail"><div className="product-card">
         <div className="image">
           <img src={b_tshirt} alt=""  className="hover-img"/>
           <img src={w_tshirt} alt="" />
@@ -97,7 +97,8 @@ const Products = () => {
           </div>
           </div>
         </div>
-        <div className="product-card">
+        </a>
+        <a href="/productdetail"> <div className="product-card">
         <div className="image">
           <img src={hoodie} alt="" />
           <img src={black_hoodie} alt="" className="hover-img" />
@@ -130,7 +131,8 @@ const Products = () => {
           </div>
           </div>
         </div>
-        <div className="product-card">  
+        </a>
+        <a href="/productdetail"><div className="product-card">  
         <div className="image">
           <img src={sweater} alt="" className="hover-img"/>
           <img src={white_sweater} alt=""  />
@@ -164,6 +166,7 @@ const Products = () => {
           </div>
           </div>
         </div>
+        </a>
         <div className="product-card">
         <div className="image">
           <img src={cap} alt="" />

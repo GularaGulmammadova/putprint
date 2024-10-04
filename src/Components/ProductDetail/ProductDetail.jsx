@@ -18,7 +18,6 @@ const ProductDetail = () => {
 
   return (
     <div className="container">
-        {/* <Nav /> */}
       <div className="product-container">
         <div className="product-detail">
           <div className="product-image">
