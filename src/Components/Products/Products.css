@@ -261,6 +261,6 @@ hr {
   .product-card {
   display: flex;
   flex-direction: column;
-  margin-left: 130px;
+  /* margin-left: 130px; */
   }
 }
