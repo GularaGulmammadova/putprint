@@ -2,7 +2,9 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  
+}
+a{
+  text-decoration: none;
 }
 .product-grid-container {
   width: 100%;
@@ -81,6 +83,13 @@ hr {
   flex-direction: column;
   width: 299px;
   height: 390px;
+}
+
+.product-card:focus,
+.product-card:active,
+.product-card:visited {
+  outline: none;
+  border: none;
 }
 
 .product-card .image {

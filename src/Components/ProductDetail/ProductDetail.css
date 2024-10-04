@@ -4,6 +4,11 @@
     margin: 0 auto;
   }
   
+  a{
+    text-decoration: none;
+  }
+  
+
   .product-container {
     display: flex;
     justify-content: center;

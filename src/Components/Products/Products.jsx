@@ -14,7 +14,7 @@ import cap from "./../../site assets/cap/cap.png";
 import bag from "./../../site assets/eco bag/ui cardd/eco-bag.png";
 import needle from "./../../site assets/logo and icons/needle.png";
 import size from "./../../site assets/logo and icons/size.png";
-import ProductDetail from "../ProductDetail/ProductDetail";
+import { Link } from "react-router-dom";
 
 const Products = () => {
 
@@ -35,7 +35,7 @@ const Products = () => {
         />
       </div>
       <div className="product-cards">
-      <a href="/productdetail">  <div className="product-card">
+      <Link to="/productdetail">  <div className="product-card">
           <div className="image">
           <img src={white_tshirt} alt="" />
           <img src={black_tshirt} alt="" className="hover-img" />
@@ -67,8 +67,8 @@ const Products = () => {
           </div>
           </div>
         </div>
-        </a>
-        <a href="/productdetail"><div className="product-card">
+        </Link>
+        <Link to="/productdetail"><div className="product-card">
         <div className="image">
           <img src={b_tshirt} alt=""  className="hover-img"/>
           <img src={w_tshirt} alt="" />
@@ -97,8 +97,8 @@ const Products = () => {
           </div>
           </div>
         </div>
-        </a>
-        <a href="/productdetail"> <div className="product-card">
+        </Link>
+        <Link to="/productdetail"> <div className="product-card">
         <div className="image">
           <img src={hoodie} alt="" />
           <img src={black_hoodie} alt="" className="hover-img" />
@@ -131,8 +131,8 @@ const Products = () => {
           </div>
           </div>
         </div>
-        </a>
-        <a href="/productdetail"><div className="product-card">  
+        </Link>
+        <Link to="/productdetail"><div className="product-card">  
         <div className="image">
           <img src={sweater} alt="" className="hover-img"/>
           <img src={white_sweater} alt=""  />
@@ -166,7 +166,7 @@ const Products = () => {
           </div>
           </div>
         </div>
-        </a>
+        </Link>
         <div className="product-card">
         <div className="image">
           <img src={cap} alt="" />
