@@ -4,6 +4,7 @@ import './Nav.css'
 import logo from './../../site assets/logo and icons/SVG/Asset 13p&p.svg'
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
 
@@ -28,10 +29,10 @@ const Nav = () => {
       <img src={logo} alt="" />
     </div>
     <nav className="nav">
-      <a href="/" className="nav-item">Ana səhifə</a>
-      <a href="/products" className="nav-item active">Məhsullar</a>
-      <a href="/about" className="nav-item">Haqqımızda</a>
-      <a href="/contact" className="nav-item">Əlaqə</a>
+      <Link to="/" className="nav-item">Ana səhifə</Link>
+      <Link to="/products" className="nav-item active">Məhsullar</Link>
+      <Link to="/about" className="nav-item">Haqqımızda</Link>
+      <Link to="/contact" className="nav-item">Əlaqə</Link>
     </nav>
     <div className="header-right">
       <div className="language-selector">
