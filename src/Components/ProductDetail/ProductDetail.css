@@ -1,0 +1,254 @@
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .product-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  
+  .product-detail {
+    display: flex;
+    gap: 20px;
+    max-width: 100%;
+
+  }
+  
+  .product-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .main-image {
+    width: 100%;
+    height: 100%;
+    max-width: 359px;
+    max-height: 409px;
+    background-color: #fefcf4;
+  }
+  
+  .thumbnail-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .thumbnail-images img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 78px;
+    height: auto;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background-color: #FCF7F7;
+  }
+  
+  .thumbnail-images img.active {
+    border-color: #FF810C;
+    border-radius: 6px; 
+  }
+  
+  .product-info {
+    flex: 1;
+  }
+  
+  .product-info h1 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #000;
+  }
+  
+  .product-info p {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #000;
+  }
+  
+  .color-variants{
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 138px;
+    height: 60px;
+  }
+  
+  .size-variants {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 333px;
+    height: 61px;
+  }
+  
+
+  .colors {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .color-circle {
+    width: 57px;
+    height: 24px;
+    border-radius: 10px;
+    border: 2px solid #C4C3C3;
+    cursor: pointer;
+  }
+
+  .sizes {
+    display: flex;
+    gap: 10px;
+    font-weight: 300;
+    font-size: 14px;
+  }
+  
+  .size-box {
+    background-color: #FFFFFF;
+    border: 1px solid #C4C3C3;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 57px;
+    display: flex;
+    height: 25px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-price {
+    display: flex;
+    align-items: center;
+    background-color: #FF9132; 
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    width: 309px;
+    height: 51px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .product-price::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 42%;
+    bottom: 0;
+    height: 35px;
+    border-right: 1px solid #fff;
+  }
+
+  .product-price span{
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .start-design-button {
+    font-weight: 500;
+    font-size: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    color: #fff;
+    margin-left: 10px;
+  }
+  
+
+  @media (max-width: 1024px) {
+    .product-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .product-detail {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .main-image {
+      max-width: 100%;
+      max-height: 300px;
+    }
+  
+    .thumbnail-images {
+      justify-content: center;
+    }
+  
+    .product-price {
+      width: 100%;
+    }
+    .product-price::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 47%;
+        bottom: 0;
+        height: 32px;
+        border-right: 1px solid #fff;
+        padding: 2px;
+      }
+      .product-info{
+        margin-top: 50px;
+      }
+  }
+  
+  @media (max-width: 768px) {
+    .product-detail {
+      gap: 10px;
+    }
+  
+    .main-image {
+      max-width: 100%;
+      max-height: 200px;
+    }
+  
+    .thumbnail-images img {
+      width: 60px;
+    }
+  
+    .size-variants {
+      width: 100%;
+    }
+  
+    .product-price {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+  
+    .start-design-button {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-image {
+      max-height: 150px;
+    }
+  
+    .thumbnail-images img {
+      width: 50px;
+    }
+  
+    .size-box, .color-circle {
+      width: 50px;
+      height: 20px;
+    }
+  }

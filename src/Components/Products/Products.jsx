@@ -14,6 +14,7 @@ import cap from "./../../site assets/cap/cap.png";
 import bag from "./../../site assets/eco bag/ui cardd/eco-bag.png";
 import needle from "./../../site assets/logo and icons/needle.png";
 import size from "./../../site assets/logo and icons/size.png";
+import ProductDetail from "../ProductDetail/ProductDetail";
 
 const Products = () => {
 
@@ -34,7 +35,7 @@ const Products = () => {
         />
       </div>
       <div className="product-cards">
-        <div className="product-card">
+      <a href="/productdetail">  <div className="product-card">
           <div className="image">
           <img src={white_tshirt} alt="" />
           <img src={black_tshirt} alt="" className="hover-img" />
@@ -66,6 +67,7 @@ const Products = () => {
           </div>
           </div>
         </div>
+        </a>
         <div className="product-card">
         <div className="image">
           <img src={b_tshirt} alt=""  className="hover-img"/>
@@ -128,7 +130,7 @@ const Products = () => {
           </div>
           </div>
         </div>
-        <div className="product-card">
+        <div className="product-card">  
         <div className="image">
           <img src={sweater} alt="" className="hover-img"/>
           <img src={white_sweater} alt=""  />
@@ -202,22 +204,6 @@ const Products = () => {
           </div>
           <hr />
           <div className="product-name" style={{marginBottom: '50px'}}>Eko çanta</div>
-          {/* <div className="detail">
-            <div className="colors">
-              <div
-                className="color"
-                style={{ backgroundColor: "#DEDEDE" }}
-              ></div>
-              <div
-                className="color"
-                style={{ backgroundColor: "#000000" }}
-              ></div>
-            </div>
-            <div className="size">
-              <span>/</span> <img src={size} alt="" />
-              S-2XL
-            </div>
-          </div> */}
           <div className="desc">
           <div className="price">
             <span>12-16₼</span>
