@@ -246,6 +246,7 @@
   @media (max-width: 480px) {
     .main-image {
       max-height: 150px;
+      width: 100px;
     }
   
     .thumbnail-images img {
