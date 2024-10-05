@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./ProductDetail.css"; 
 import w_tshirt_front from "./../../site assets/t-shirt oversize/white/mockup/W_F.png";
 import w_tshirt_back from "./../../site assets/t-shirt oversize/white/mockup/W_B.png";
-// import Nav from "../Nav/Nav";
 
 const ProductDetail = () => {
   const [mainImage, setMainImage] = useState(w_tshirt_front);
@@ -43,7 +42,7 @@ const ProductDetail = () => {
             <p>
               Bu unisex t-shirt, gündəlik istifadə üçün mükəmməl bir parça olaraq dizayn edilmişdir. 
               Bu t-shirt, istənilən stil ilə birləşdirə biləcəyiniz sadə və şık bir dizayna malikdir.
-              Har yerdə rahatlıqla geyinmək üçün mükəmməl bir seçimdir. 
+              Hər yerdə rahatlıqla geyinmək üçün mükəmməl bir seçimdir. 
               Yüksək keyfiyyətli pambıq materialdan hazırlanmış, nəfəs alan və rahat bir fit təqdim edir.
             </p>
             <div className="color-variants">
