@@ -21,7 +21,11 @@ a:active, a:hover {
   outline: none; 
 }
 
-body {
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Səhifənin sağ tərəfə genişlənməsinin qarşısını almaq üçün */
+}body {
   background-color: #f4f4f4;
 }
 
