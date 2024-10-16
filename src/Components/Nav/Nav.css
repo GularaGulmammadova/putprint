@@ -75,4 +75,9 @@
     color: #ff8c00;
   } */
   
-  
+
+
+.nav-item.active {
+    color: #FF810C;
+    border-radius: 4px; 
+}
