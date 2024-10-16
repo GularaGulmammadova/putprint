@@ -28,7 +28,7 @@ const About = () => {
     </div>
 
 
-    <section className="why_us" style={{width: '100%', maxWidth: '1200px'}}> 
+    <section className="why_us"> 
   <div className="why_us_title">
     Niyə Put&Printi seçməlisiniz?
   </div>
@@ -66,7 +66,7 @@ const About = () => {
   </div>
 </section>
 
-<div className="container" style={{width: '100%', maxWidth: '1200px', margin: 'o auto'}}>
+<div className="container">
   <div className="ai-section">
     <img src={ai_image} alt="" className='image-item' />
   <div className="text-section">
@@ -80,13 +80,14 @@ const About = () => {
 </div>
 </div>
 
+
   <div className="background-image">
     <div className="content">
       <h2 className="designer-heading">Dizaynıvıza başlamağa hazırsınız?</h2>
       <button className="start-now-design">İndi Başla</button>
     </div>
   </div>
-
+{/* <BackgroundImage/> */}
 
 {/* <div className="ai-image" style={{width: '100%', maxWidth: '1200px'}}>
     <div className="ai-image-left">
