@@ -22,16 +22,16 @@
   </head>
   <body>
     <div id="root"></div>
-    <div class="modalDesign" id="modalDesign">
-      <header class="header">
-        <div class="headerBox logo" style="cursor: pointer">
+    <div class="editorModal" id="editorModal">
+      <div class="heading">
+        <div class="headingBox logo" style="cursor: pointer">
           <span class="clickLogo"><b>Logo</b></span>
         </div>
-        <div class="headerBox exit" style="cursor: pointer">
+        <div class="headingBox exit" style="cursor: pointer">
           <div class="exitText" id="exit"><b>Exit</b></div>
           <div class="exitImage"><span class="exitCross"></span></div>
         </div>
-      </header>
+      </div>
   
       <div class="container-fluid">
         <div class="row">
@@ -96,7 +96,7 @@
             />
           </section>
   
-          <footer class="col-lg-2 col-md-12">
+          <div class="col-lg-2 col-md-12" id="foter">
             <!-- <button type="button" class="btn btn-info footerBut" id="upload-button" onclick="openUpload()"> Upload Images </button> -->
             <button
               type="button"
@@ -105,7 +105,7 @@
             >
               Add to basket
             </button>
-          </footer>
+          </div>
         </div>
       </div>
   
@@ -119,7 +119,7 @@
       >
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-heading">
               <h5 class="modal-title" id="exampleModalLabel">Choose a color</h5>
               <button
                 type="button"
@@ -145,7 +145,7 @@
       >
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-heading">
               <h5 class="modal-title text-center" id="exampleModalLabelText">
                 Editor Text
               </h5>

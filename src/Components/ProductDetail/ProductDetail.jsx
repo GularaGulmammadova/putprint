@@ -16,8 +16,8 @@ const ProductDetail = () => {
   const images = [w_tshirt_front, w_tshirt_back];
 
   const Show = () => {
-    const modalDesign = document.getElementById('modalDesign');
-    modalDesign.style.display = 'block';
+    const editorModal = document.getElementById('editorModal');
+    editorModal.style.display = 'block';
   }
 
   return (
