@@ -27,9 +27,9 @@ let colors = `
 `;
 const exit = document.getElementById("exit");
 
-const modalDesign = document.getElementById("modalDesign");
+const editorModal = document.getElementById("editorModal");
 exit.addEventListener("click", () => {
-  modalDesign.style.display = "none";
+  editorModal.style.display = "none";
 });
 
 function clearScreen() {
@@ -603,6 +603,6 @@ function clearCanvas() {
   layer.destroy();
 }
 
-$("#tshirt-add-to-cart").on("click", function () {
-  let dataURL = stage.toDataURL();
-});
+// $("#tshirt-add-to-cart").on("click", function () {
+//   let dataURL = stage.toDataURL();
+// });
