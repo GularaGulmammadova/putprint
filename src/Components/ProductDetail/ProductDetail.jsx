@@ -15,6 +15,11 @@ const ProductDetail = () => {
 
   const images = [w_tshirt_front, w_tshirt_back];
 
+  const Show = () => {
+    const modalDesign = document.getElementById('modalDesign');
+    modalDesign.style.display = 'block';
+  }
+
   return (
     <div className="container">
       <div className="product-container">
@@ -65,7 +70,7 @@ const ProductDetail = () => {
 
             <div className="product-price">
               <span>30-34₼</span>
-              <button className="start-design-button">Dizayna başla</button>
+              <button onClick={() => Show()} className="start-design-button">Dizayna başla</button>
             </div>
           </div>
         </div>
