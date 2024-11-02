@@ -1,0 +1,15 @@
+.colors {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.roundBtn {
+    width: 50px;
+    height: 30px;
+    border: 1px solid #262626;
+    border: 1px solid lightslategray;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 20px 0;
+}

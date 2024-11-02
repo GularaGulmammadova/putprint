@@ -4,7 +4,7 @@ let colors = `
 <ul class="list-group">
 <li class="list-group-item color-preview"  title="White" style="background-color:#ffffff;"></li>
 <li class="list-group-item color-preview"  title="Dark Heather" style="background-color:#616161;"></li>
-<li class="list-group-item color-preview" title="Gray" style="background-color:#f0f0f0;"></li>
+<li class="list-group-item color-preview" title="Gray" style="background-color:#f0f0f0;"></li> 
 <li class="list-group-item color-preview" title="Charcoal" style="background-color:#5b5b5b;"></li>
 <li class="list-group-item color-preview"  title="Black" style="background-color:#222222;"></li>
 <li class="list-group-item color-preview"  title="Heather Orange" style="background-color:#fc8d74;"></li>
@@ -30,7 +30,7 @@ const exit = document.getElementById("exit");
 const editorModal = document.getElementById("editorModal");
 exit.addEventListener("click", () => {
   editorModal.style.display = "none";
-});
+}); 
 
 function clearScreen() {
   $("#editorButtons").hide();

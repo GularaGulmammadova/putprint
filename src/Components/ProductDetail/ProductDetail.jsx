@@ -3,22 +3,23 @@ import React, { useState } from "react";
 import "./ProductDetail.css"; 
 import w_tshirt_front from "./../../site assets/t-shirt oversize/white/mockup/W_F.png";
 import w_tshirt_back from "./../../site assets/t-shirt oversize/white/mockup/W_B.png";
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
   const [mainImage, setMainImage] = useState(w_tshirt_front);
   const [activeImage, setActiveImage] = useState(0);
 
   const handleThumbnailClick = (image, index) => {
-    setMainImage(image);
+    setMainImage(image); 
     setActiveImage(index);
   };
 
   const images = [w_tshirt_front, w_tshirt_back];
 
-  const Show = () => {
-    const editorModal = document.getElementById('editorModal');
-    editorModal.style.display = 'block';
-  }
+  // const Show = () => {
+  //   const editorModal = document.getElementById('editorModal');
+  //   editorModal.style.display = 'block';
+  // }
 
   return (
     <div className="container">
@@ -41,7 +42,7 @@ const ProductDetail = () => {
                 />
               ))}
             </div>
-          </div>
+          </div> 
           <div className="product-info">
             <h1>Unisex Oversize Köynək</h1>
             <p>
@@ -70,7 +71,8 @@ const ProductDetail = () => {
 
             <div className="product-price">
               <span>30-34₼</span>
-              <button onClick={() => Show()} className="start-design-button">Dizayna başla</button>
+              {/* <button onClick={() => Show()} className="start-design-button">Dizayna başla</button> */}
+              <Link to="/designTshirt" className="start-design-button">Dizayna başla</Link>
             </div>
           </div>
         </div>
