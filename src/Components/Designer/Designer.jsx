@@ -10,5 +10,5 @@ function Designer({frontSide, backSide}) {
     <Canvas frontSide={frontSide} backSide={backSide} />
   </div>)
 }
-
+ 
 export default Designer;

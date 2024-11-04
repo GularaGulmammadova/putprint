@@ -52,7 +52,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange }) => {
                                     </div>
                                     <div className={styles.col}>
                                         <h3 className={styles.title}>Rotation</h3>  
-                                        <input value={Math.round(content.image.rotation, 1)} onChange={(e) => setContent({...content, image: {...content.image, rotation: e.target.value}})} min={0} max={360} className={styles.input} type='number' placeholder='10' />
+                                        <input defaultValue={Math.round(content.image.rotation, 1)} onChange={(e) => setContent({...content, image: {...content.image, rotation: e.target.value}})} min={0} max={360} className={styles.input} type='number' placeholder='10' />
                                     </div>
                                 </div>
                             </div>

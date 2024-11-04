@@ -37,6 +37,7 @@
     height: 100%;
     max-width: 359px;
     max-height: 409px;
+    object-fit: contain;
     background-color: #fefcf4;
   }
   
@@ -63,7 +64,18 @@
     border-color: #FF810C;
     border-radius: 6px; 
   }
+  .color-circle.selected {
+    border: 2px solid orange;
+  }
   
+  .size-box.active-size {
+    background-color: orange;
+    color: white;
+  }
+  .threads-box.active-threads {
+    background-color: orange;
+    color: white;
+  }
   .product-info {
     flex: 1;
   }
@@ -100,6 +112,14 @@
     height: 61px;
   }
   
+  .threads-variants {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 333px;
+    height: 61px;
+  }
 
   .colors {
     display: flex;
@@ -114,11 +134,31 @@
     cursor: pointer;
   }
 
+  .threads  {
+    display: flex;
+    gap: 10px;
+    font-weight: 300;
+    font-size: 14px;
+  }
+
   .sizes {
     display: flex;
     gap: 10px;
     font-weight: 300;
     font-size: 14px;
+  }
+
+  .threads-box {
+    background-color: #FFFFFF;
+    border: 1px solid #C4C3C3;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    height: 25px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
   
   .size-box {
@@ -140,7 +180,7 @@
     align-items: center;
     background-color: #FF9132; 
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     color: #fff;
     width: 309px;
     height: 51px;
@@ -148,30 +188,31 @@
     position: relative;
   }
   
-  .product-price::after {
+  /* .product-price::after {
     content: "";
     position: absolute;
     top: 10px;
-    left: 42%;
+    left: 36.4%;
+    right: 192px;
     bottom: 0;
     height: 35px;
     border-right: 1px solid #fff;
-  }
+  } */
 
   .product-price span{
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
   }
 
   .start-design-button {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 20px;
     background: none;
     border: none;
     cursor: pointer;
     border-radius: 15px;
     color: #fff;
-    margin-left: 10px;
+    margin-left: 30px;
   }
   
 

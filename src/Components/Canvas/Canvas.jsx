@@ -14,7 +14,7 @@ const Canvas = ({frontSide, backSide}) => {
   const [showTrasformerL, setShowTransformerL] = useState(false);
 
   const handleImageClick = () => {
-      setShowTransformer(true); 
+      setShowTransformer(true);  
   };
   
   useEffect(() => {

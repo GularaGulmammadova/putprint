@@ -58,6 +58,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    color: #fff !important;
   }
 
   .about-image {
@@ -135,7 +136,7 @@
   .image-item{
     width: 100%;
     max-width: 636px;
-    height: 361px;
+    height:477px;
     object-fit: cover;
     margin: 0 auto;
   }
@@ -164,7 +165,7 @@
   }
 
   .text-section .ai-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     color: #FF810C;
   }
@@ -190,7 +191,8 @@
   }
 
   .background-image {
-    background-image: url('https://s3-alpha-sig.figma.com/img/afef/fb46/5cb04fe930e5c58f1c741b49a6ed353b?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Hcx1BsJwfE9hc~ouegtT-cGLvEPkBRjdfd4AMUsHLiP5qImZHqADEc2S2KWLtO1CUXKqWCKjj-g9lrrRHtE2msM4UKLUl4Vhkb8BZabeAiI3DdBwfOWbuXA8EQGfIKCboCiIqBktlvVjHCcJfydqhS7nyPOPYtjxbfiInJ5II5JzGwKOi5ZBSq-F0nI7rQyVu6uU3Dd4CSAwOLM-AZUhJS1Jf23tMOTjdGS4mvsyT8yGzAO3PTUw9Um4zpqE4k0wHM9x8OzU90bs31gWSFo0LHJCFSLjtZZEFwVnS-~qHywxp7ov2DT3OA4gl1tZioJS6SfCb43uV60Af1x9D9231g__');
+    position: relative;
+    background-image: url('./../../site\ assets//areuready.png');
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -216,15 +218,18 @@
 } 
 
   .start-now-design { 
+    position: absolute;
+    top: 65%;
+    left: 40%;
     width: 225px;
     height: 57px;
-    gap: 8px;
     padding: 12px 14px 12px 14px;
     background-color: #FF810C; 
     color: #fff; 
     border: none; 
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500; 
     border-radius: 8px; 
     cursor: pointer;
+
   }

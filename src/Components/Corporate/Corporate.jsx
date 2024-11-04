@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import "./Contact.css";
-import contactimage from "./../../site assets/contactimage.png";
+import "./Corporate.css";
+import contactimagekorporativ from "./../../site assets/korporativ_image.png";
 
-function Contact() {
+function Corporate() {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -29,8 +29,8 @@ function Contact() {
     return (
         <>
             <div className='ContactPageBox'>
-                <img src={contactimage} className='fullscreen-image' alt="Contact" />
-                <p> Sualların və məsləhətlərin üçün Put&Print komandası ilə əlaqə saxla.</p>
+                <img src={contactimagekorporativ} className='fullscreen-image-korporativ' alt="Contact" />
+                <p> Korporativ sifarişlər üçün bizimlə əlaqə saxlayın!</p>
                 <div className='contact-form'>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -100,4 +100,4 @@ function Contact() {
     );
 }
 
-export default Contact;
+export default Corporate;

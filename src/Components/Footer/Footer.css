@@ -21,6 +21,11 @@
 .footer-column ul {
     list-style: none;
     padding: 0;
+
+}
+#contact{
+    width: 250px;
+    margin-right: 20px;
 }
 
 .footer-column ul li {

@@ -11,6 +11,7 @@
 a{
   text-decoration: none;
 }
+
 a:link, a:visited {
   color: black;
   text-decoration: none;
@@ -24,8 +25,10 @@ a:active, a:hover {
 html, body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden; /* Səhifənin sağ tərəfə genişlənməsinin qarşısını almaq üçün */
-}body {
+  overflow-x: hidden; 
+}
+
+body {
   background-color: #f4f4f4;
 }
 
