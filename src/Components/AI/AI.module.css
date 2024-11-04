@@ -1,0 +1,42 @@
+
+
+.container {
+    width: 100%;
+}
+
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img {
+    width: calc(50% - 20px);
+    height: 200px;
+    background-color: lightgrey;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.btn {
+    background-color: #ff800b;
+    padding: 20px 0;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    width: 100%;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px 0 20px 0;
+}
+
+@media only screen and (max-width: 1600px) {
+    .btn {
+        padding: 10px 0;
+    }
+    .img {
+        height: 100px;
+        width: calc(50% - 10px);
+        margin: 5px;
+    }
+}

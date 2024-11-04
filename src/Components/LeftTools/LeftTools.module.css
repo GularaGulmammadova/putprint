@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: calc(25% - 64px);
-    font-size: 1.2rem;
+    font-size: 16px;
 }
 
 .flex {
@@ -11,27 +11,27 @@
 
 .col {
     margin: 0 5px;
-    font-size: 0.9rem;
 }
 
 .col .input {
     margin: 2px 0;
-    padding: 6px;
+    padding: 6px; 
+    width: 5rem;
 }
 
 .col .title {
-    margin: 2px 0;
+    margin: 2px 0 2px 2px;
+    font-size: 1rem;
 }
 
 .chosen {
     background-color: transparent;
-    padding: 10px;
+    padding: 20px 0;
     border: 1px solid #c9c9c9;
     border-radius: 10px;
     width: calc(33% - 10px);
     color: #584C59;
     cursor: pointer;
-    font-size: 1.2rem;
     margin: 0;
     background-color: white;
 }
@@ -55,13 +55,7 @@
 .heading {
     color: #cd7dd4;
     font-weight: 600;
-    font-size: 2rem;
     margin-top: 0;
-}
-
-.title {
-    color: #584C59;
-    font-weight: 500;
 }
 
 .btn {
@@ -74,13 +68,12 @@
     font-weight: 500;
     cursor: pointer;
     margin: 10px 0 20px 0;
-    font-size: 1.2rem;
 }
 
 .btns .btn {
     width: calc(33% - 10px);
     margin: 0;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .input {
@@ -91,7 +84,6 @@
     width: calc(100% - 22px);
     margin: 20px 0;
     cursor: pointer;
-    font-size: 1.1rem;
 }
 
 .none {
@@ -118,7 +110,6 @@
 .heading {
     color: #cd7dd4;
     font-weight: 600;
-    font-size: 2rem;
     margin-top: 0;
 }
 
@@ -162,14 +153,52 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(80vh - 216px);
+    min-height: 200px;
     width: 100%;
     border-radius: 15px;
     border: 1px dashed #cbccce;
   }
   
   .noItemsTitle {
-    font-size: 22px;
     font-weight: 400;
     color: #c9c9c9;
+    font-size: 1.2rem;
+  }
+
+  @media only screen and (max-width: 1600px) {
+    .title {
+        font-size: 1.2rem;
+        margin-left: 0;
+    }
+    .btns {
+        margin: 10px 10px 0 10px;
+        display: flex;
+        gap: 10px;
+    }
+    .btns .btn {
+        font-size: 0.8rem;
+    }
+    .btn {
+        padding: 10px 0;
+    }
+    .chosen {
+        padding: 10px 0;
+    }
+    .input {
+        margin: 10px 0;
+    }
+    .imgAndTitle {
+        display: block;
+    }
+    .col .input {
+        width: 3rem;
+    }
+    .col {
+        margin-left: 0;
+    }
+    .img {
+        width: calc(100% - 10px);
+        height: 150px;
+        margin-bottom: 10px;
+    }
   }

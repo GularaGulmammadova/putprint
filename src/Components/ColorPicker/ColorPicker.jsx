@@ -1,14 +1,13 @@
-import React from 'react'
 import styles from './ColorPicker.module.css'
 
-const ColorPicker = ({setColor}) => {
+const ColorPicker = ({type, setColor}) => {
 
-  const colors = ['white', '#262626', 'magenta', 'red', 'teal', 'grey']
+  const colors = type==='tshirt' ? ['white', '#262626', 'magenta', 'red', 'teal', 'grey'] : ['white', '#262626'];
 
   return (
-    <div className={styles.colors}>
+    <div className={type!=='tshirt' ? styles.twoColors : styles.colors}>
         {colors.map((c, i) => <button className={styles.roundBtn} style={{backgroundColor: `${c}`}} key={i} onClick={() => setColor(c)}></button>)}
-      </div>
+      </div> 
   )
 }
 

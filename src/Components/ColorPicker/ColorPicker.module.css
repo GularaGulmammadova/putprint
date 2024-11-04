@@ -1,7 +1,15 @@
 .colors {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    flex-wrap: wrap;
+
+}
+
+.twoColors {
+    display: flex;
+}
+
+.twoColors .roundBtn {
+    margin-right: 10px;
 }
 
 .roundBtn {
@@ -11,5 +19,5 @@
     border: 1px solid lightslategray;
     border-radius: 20px;
     cursor: pointer;
-    margin: 20px 0;
+    margin: 10px 10px 10px 0;
 }

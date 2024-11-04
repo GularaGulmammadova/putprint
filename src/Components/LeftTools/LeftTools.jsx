@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useState, useRef } from 'react';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import styles from './LeftTools.module.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faTextHeight, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
-import SparclesIco from '../../icos/SparclesIco';
+// import SparclesIco from '../../icos/SparclesIco';
 import FontFamilyDropDown from '../FontFamilyDropDown/FontFamilyDropDown';
+import AI from '../AI/AI';
 
-const LeftTools = ({ setContent, content, image, deleteImg, handleImageChange }) => {
+const LeftTools = ({ setContent, content, deleteImg, handleImageChange }) => {
 
     const [chosen, setChosen] = useState('Yüklə');
     const fileInputRef = useRef(null); // Create a ref for the file input
@@ -25,7 +27,7 @@ const LeftTools = ({ setContent, content, image, deleteImg, handleImageChange })
             <div className={styles.btns}>
                 <button onClick={() => setChosen('Yazı')} className={chosen!=='Yazı' ? styles.chosen : styles.btn}>{/*<FontAwesomeIcon icon={faTextHeight} />*/} Yazı</button>
                 <button onClick={() => setChosen('Yüklə')} className={chosen!=='Yüklə' ? styles.chosen : styles.btn}>{/*<FontAwesomeIcon icon={faArrowUpFromBracket} />*/} Yüklə</button>
-                <button onClick={() => setChosen('AI ilə yarat')} className={chosen!=='AI ilə yarat' ? styles.chosen : styles.btn}><SparclesIco color={chosen!=='AI ilə yarat' ? 'grey' : 'white'} /> AI ilə yarat</button>
+                <button onClick={() => setChosen('AI')} className={chosen!=='AI' ? styles.chosen : styles.btn}>{/*<SparclesIco color={chosen!=='AI' ? 'grey' : 'white'} />*/} AI</button>
             </div>
             <div className={styles.container}>
                 <div className={chosen==='Yüklə' ? styles.choiceImg : styles.none}>
@@ -42,15 +44,15 @@ const LeftTools = ({ setContent, content, image, deleteImg, handleImageChange })
                                 <div className={styles.flex}>  
                                     <div className={styles.col}>
                                         <h3 className={styles.title}>Width</h3>  
-                                        <input onChange={(e) => setContent({...content, image: {...content.image, width: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />                            
+                                        <input value={Math.round(content.image.width, 1)} onChange={(e) => setContent({...content, image: {...content.image, width: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />                            
                                     </div>
                                     <div className={styles.col}>
                                         <h3 className={styles.title}>Height</h3>  
-                                        <input onChange={(e) => setContent({...content, image: {...content.image, height: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />
+                                        <input value={Math.round(content.image.height, 1)} onChange={(e) => setContent({...content, image: {...content.image, height: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />
                                     </div>
                                     <div className={styles.col}>
                                         <h3 className={styles.title}>Rotation</h3>  
-                                        <input onChange={(e) => setContent({...content, image: {...content.image, rotation: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />
+                                        <input value={Math.round(content.image.rotation, 1)} onChange={(e) => setContent({...content, image: {...content.image, rotation: e.target.value}})} min={0} max={360} className={styles.input} type='number' placeholder='10' />
                                     </div>
                                 </div>
                             </div>
@@ -68,22 +70,24 @@ const LeftTools = ({ setContent, content, image, deleteImg, handleImageChange })
 
           <div className={chosen==='Yazı' ? styles.choiceText : styles.none}>
             <h3 className={styles.title}>Write something</h3>
-            <input onChange={(e) => setContent({...content, label: {...content.label, title: e.target.value}})} className={styles.input} type='text' placeholder='Something' />
+            <input defaultValue={content.label.title} onChange={(e) => setContent({...content, label: {...content.label, title: e.target.value}})} className={styles.input} type='text' placeholder='Something' />
 
             <h3 className={styles.title}>Choose color</h3>
-            <ColorPicker setColor={(c) => setContent({...content, label: {...content.label, color: c}})} />
+            <ColorPicker type='tshirt' setColor={(c) => setContent({...content, label: {...content.label, color: c}})} />
             
             <h3 className={styles.title}>Choose font size</h3>
-            <input onChange={(e) => setContent({...content, label: {...content.label, fontSize: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />
+            <input defaultValue={content.label.fontSize} onChange={(e) => setContent({...content, label: {...content.label, fontSize: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />
             
             <h3 className={styles.title}>{`Choose text's rotation (in degrees)`}</h3>
-            <input onChange={(e) => setContent({...content, label: {...content.label, rotation: e.target.value}})} min={10} max={360} className={styles.input} type='number' placeholder='0' />
+            <input value={Math.round(content.label.rotation, 1)} onChange={(e) => setContent({...content, label: {...content.label, rotation: e.target.value}})} min={0} max={360} className={styles.input} type='number' placeholder='0' />
 
             <h3 className={styles.title}>Choose font family</h3>
-            <FontFamilyDropDown fontFamily={content.label.fontFamily} setFontFamily={(f) => setContent({...content, label: {...content.label, fontFamily: f}})} />
+            <FontFamilyDropDown defaultValue={content.label.fontFamily} fontFamily={content.label.fontFamily} setFontFamily={(f) => setContent({...content, label: {...content.label, fontFamily: f}})} />
             
             <button onClick={() => setContent({...content, label: {...content.label, tshirtLabel: content.label.title}})} className={styles.btn}>Add text</button>
           </div>
+
+          {chosen==='AI' && <AI />}
 
         </div>
       </div>

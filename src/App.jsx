@@ -9,21 +9,29 @@ import Contact from './Components/ContactPage/Contact'
 import Footer from './Components/Footer/Footer'
 import Canvas from './Components/Canvas/Canvas'
 import Designer from './Components/Designer/Designer'
+import ResizableText from './Components/Resize/Resize'
 
 const App = () => {
   const location = useLocation();
 
+
+
   return ( 
     <div>
-        {location.pathname !== '/designTshirt' && <Nav/>}
+        {!location.pathname.includes('/designTshirt') && <Nav/>}
         <Routes>
           <Route path='/products' element={<Products />} />
           <Route path='/productdetail' element={<ProductDetail/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/contact' element={<Contact/>}/>
-          <Route path='/designTshirt' element={<Designer />}/>
+          <Route path='/designTshirt/tShirt' element={<Designer frontSide='/crew_front.png' backSide='/crew_back.png' />}/>
+          <Route path='/designTshirt/overSizeTshirt' element={<Designer frontSide='/crew_front.png' backSide='/crew_back.png' />}/>
+          <Route path='/designTshirt/hoodie' element={<Designer frontSide='/crew_front.png' backSide='/crew_back.png' />}/>
+          <Route path='/designTshirt/sviter' element={<Designer frontSide='/crew_front.png' backSide='/crew_back.png' />}/>
+          <Route path='/designTshirt/kepka' element={<Designer frontSide='/crew_front.png' backSide='/crew_back.png' />}/>
+          <Route path='/designTshirt/bag' element={<Designer frontSide='/crew_front.png' backSide='/crew_back.png' />}/>
         </Routes>
-        {location.pathname !== '/designTshirt' && <Footer />}
+        {!location.pathname.includes('/designTshirt') && <Footer />}
     </div>
   )
 }

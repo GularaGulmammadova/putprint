@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 import Canvas from "../Canvas/Canvas";
 import NavBar from "../NavBar/NavBar";
 import styles from "./Designer.module.css"
 
-function Designer() {
+function Designer({frontSide, backSide}) {
   return (
   <div className={styles.fullWidth}>
     <NavBar /> 
-    <Canvas />
+    <Canvas frontSide={frontSide} backSide={backSide} />
   </div>)
 }
 

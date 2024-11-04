@@ -72,7 +72,7 @@ const ProductDetail = () => {
             <div className="product-price">
               <span>30-34₼</span>
               {/* <button onClick={() => Show()} className="start-design-button">Dizayna başla</button> */}
-              <Link to="/designTshirt" className="start-design-button">Dizayna başla</Link>
+              <Link to="/designTshirt/tshirt" className="start-design-button">Dizayna başla</Link>
             </div>
           </div>
         </div>

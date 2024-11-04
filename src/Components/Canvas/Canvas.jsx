@@ -1,34 +1,65 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import styles from './Canvas.module.css';
 import LeftTools from "../LeftTools/LeftTools";
 import ManageFiles from "../ManageFiles/ManageFiles";
-import { Stage, Layer, Image as KonvaImage, Text, Rect } from 'react-konva';
+import { Transformer, Stage, Layer, Image as KonvaImage, Text, Rect } from 'react-konva';
 
-const Canvas = () => {
+const Canvas = ({frontSide, backSide}) => {
+  const [imageNode, setImageNode] = useState(null);
+  const [labelNode, setLabelNode] = useState(null);
+  const [cvsWidth, setCvsWidth] = useState(window.innerWidth / 2);
+  const [cvsHeight, setCvsHeight] = useState((window.innerHeight / 10) * 8);
+  const [showTrasformer, setShowTransformer] = useState(false);
+  const [showTrasformerL, setShowTransformerL] = useState(false);
+
+  const handleImageClick = () => {
+      setShowTransformer(true); 
+  };
+  
+  useEffect(() => {
+      const handleResize = () => {
+          setCvsWidth(window.innerWidth / 2);
+          setCvsHeight((window.innerHeight / 10) * 8);
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      
+      return () => {
+          window.removeEventListener('resize', handleResize);
+      };
+  }, []);
 
   const [showFront, setShowFront] = useState(true);
+
   
   const [tShirt, setTshirt] = useState(null);
   const [backTshirt, setBackTshirt] = useState(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [imageSrcBack, setImageSrcBack] = useState(null);
-  const [imageObj, setImageObj] = useState(null);
 
   const [backContent, setBackContent] = useState({
     tshirtColor: 'white',
     image: {
       value: '',
-      width: 200,
-      height: 200,
-      rotation: 0
+      width:  (cvsWidth / 8) ,
+      height: (cvsWidth / 8),
+      rotation: 0,
+      x:  7*(cvsWidth / 2)/8,
+      y:  cvsHeight/2 - (cvsWidth/16) - 20
     },
     label: {
       title: '',
       tshirtLabel: '',
+      width: (cvsWidth / 8),
+      height: 20,
       fontFamily: 'Arial',
       fontSize: 20,
       rotation: 0,
-      color: 'black'
+      color: 'black',
+      x:  7*(cvsWidth / 2)/8,
+      y: cvsHeight/2 - (cvsWidth/16) - 20
     }
   })
 
@@ -37,9 +68,11 @@ const Canvas = () => {
 
     image: {
       value: '',
-      width: 200,
-      height: 200,
-      rotation: 0
+      width: (cvsWidth / 8),
+      height: (cvsWidth / 8),
+      rotation: 0,
+      x: 7*(cvsWidth / 2)/8,
+      y: cvsHeight/2 - (cvsWidth/16) - 20
     },
 
     label: {
@@ -48,14 +81,51 @@ const Canvas = () => {
       fontFamily: 'Arial',
       fontSize: 20,
       rotation: 0,
-      color: 'black'
+      color: 'black',
+      x: 7*(cvsWidth / 2)/8,
+      y: cvsHeight/2 - (cvsWidth/16) - 20
     }
   })
 
-  const [imagePosition, setImagePosition] = useState({
-    x: (window.innerWidth / 2) / 2 - 100, 
-    y: (window.innerHeight / 10 * 8) / 2 - 100, 
-  });
+  const handleTransform = (e) => {
+      const node = e.target;
+      const newWidth = Math.max(node.width() * node.scaleX(), 20);
+      const newHeight = Math.max(node.height() * node.scaleY(), 20);
+      const newRotation = node.rotation(); 
+
+      node.setAttrs({
+          scaleX: 1,
+          scaleY: 1,
+      });
+
+      if (showFront) {
+          setFrontContent(prevContent => ({...prevContent, image: { ...prevContent.image, width: newWidth, height: newHeight, rotation: newRotation}}));
+      } else {
+          setBackContent(prevContent => ({ ...prevContent, image: { ...prevContent.image, width: newWidth, height: newHeight, rotation: newRotation}}));
+      }
+
+      node.getLayer().batchDraw(); 
+  };
+
+  const handleLabelTransform = (e) => {
+    const node = e.target;
+    const newWidth = Math.max(node.width() * node.scaleX(), 20);
+    const newHeight = Math.max(node.height() * node.scaleY(), 20);
+    const newRotation = node.rotation(); 
+
+    node.setAttrs({
+        scaleX: 1,
+        scaleY: 1,
+    });
+
+    if (showFront) {
+        setFrontContent(prevContent => ({...prevContent, label: { ...prevContent.label, width: newWidth, height: newHeight, rotation: newRotation}}));
+    } else {
+        setBackContent(prevContent => ({ ...prevContent, label: { ...prevContent.label, width: newWidth, height: newHeight, rotation: newRotation}}));
+    }
+
+    node.getLayer().batchDraw(); 
+};
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -84,79 +154,29 @@ const Canvas = () => {
       reader.readAsDataURL(file);
     }
   }
-
-  const handleDragMove = (e) => {
+  
+  const handleDragEnd = (e, t) => {
     const newX = e.target.x();
     const newY = e.target.y();
-  
-    const areaWidth = 250;
-    const areaHeight = 400;
-    const centerX = (window.innerWidth / 2) / 2 - 5; 
-    const centerY = (window.innerHeight / 10 * 8) / 2 - 20;
-
-    const constrainedX = showFront ? Math.min(
-      Math.max(newX, centerX - areaWidth / 2), 
-      centerX + areaWidth / 2 - frontContent.image.width 
-    ) : Math.min(
-      Math.max(newX, centerX - areaWidth / 2), 
-      centerX + areaWidth / 2 - backContent.image.width 
-    )
 
 
-    const constrainedY = showFront ? Math.min(
-      Math.max(newY, centerY - areaHeight / 2), 
-      centerY + areaHeight / 2 - frontContent.image.height 
-    ) : Math.min(
-      Math.max(newY, centerY - areaHeight / 2), 
-      centerY + areaHeight / 2 - backContent.image.height 
-    ) ;
-  
-    setImagePosition({ x: constrainedX, y: constrainedY });
-    e.target.x(constrainedX); 
-    e.target.y(constrainedY); 
-    e.target.getStage().batchDraw();
-  };
-  
-  const handleDragEnd = (e) => {
-    const newX = e.target.x();
-    const newY = e.target.y();
-  
-    const areaWidth = 250;
-    const areaHeight = 400;
-    const centerX = (window.innerWidth / 2) / 2 - 5; 
-    const centerY = (window.innerHeight / 10 * 8) / 2 - 20;
-  
-    showFront ? setImagePosition({ 
-      x: Math.min(
-        Math.max(newX, centerX - areaWidth / 2), 
-        centerX + areaWidth / 2 - frontContent.image.width
-      ), 
-      y: Math.min(
-        Math.max(newY, centerY - areaHeight / 2), 
-        centerY + areaHeight / 2 - frontContent.image.height 
-      ) 
-    }) : setImagePosition({ 
-      x: Math.min(
-        Math.max(newX, centerX - areaWidth / 2), 
-        centerX + areaWidth / 2 - backContent.image.width
-      ), 
-      y: Math.min(
-        Math.max(newY, centerY - areaHeight / 2), 
-        centerY + areaHeight / 2 - backContent.image.height 
-      ) 
-    })
+    if (showFront && t==='img') setFrontContent({...frontContent, image: {...frontContent.image, x: newX, y: newY}}); 
+    if (!showFront && t==='img') setBackContent({...backContent, image: {...backContent.image, x: newX, y: newY}});
+    if (showFront && t==='label') setFrontContent({...frontContent, label: {...frontContent.label, x: newX, y: newY}}); 
+    if (!showFront && t==='label') setBackContent({...backContent, label: {...backContent.label, x: newX, y: newY}});
+
   };
   
 
   useEffect(() => {
     const img = new window.Image();
-    img.src = '/crew_front.png'; 
+    img.src = frontSide; 
     img.onload = () => {
       setTshirt(img);
     };
 
     const backImg = new window.Image();
-    backImg.src = '/crew_back.png';
+    backImg.src = backSide;
     backImg.onload = () => {
       setBackTshirt(backImg)
     }
@@ -180,130 +200,159 @@ const Canvas = () => {
     
   }, [imageSrcBack, showFront]);
 
+  const currentImage = showFront ? frontContent.image : backContent.image;
+  const currentLabel = showFront ? frontContent.label : backContent.label;
 
   return (
     <div className={styles.flex}>
       <LeftTools 
         setContent={showFront ? setFrontContent : setBackContent}
         content={showFront ? frontContent : backContent}
-        image={imageObj ? imageObj.src : ''} 
-        deleteImg={() => {setImageSrc(''); setImageObj('');}} 
+        deleteImg={() => {
+          if (showFront) {
+            setImageSrc(''); 
+            setFrontContent({...frontContent, image: {...frontContent.image, value: ''}})
+          } else {
+            setImageSrcBack('');
+            setBackContent({...backContent, image: {...backContent.image, value: ''}})
+          }
+        }}
         handleImageChange={showFront ? handleImageChange : handleBackImageChange} 
       />
       <div className={styles.canvas}>
-      <Stage width={window.innerWidth / 2} height={(window.innerHeight / 10) * 8}>
+      <Stage width={cvsWidth} height={cvsHeight}>
         <Layer>
             {tShirt && (
             <>
+
               <Rect
-                width={598} 
-                height={650} 
-                x={(window.innerWidth / 2) / 2 - 300} 
-                y={(window.innerHeight / 10 * 8) / 2 - 325} 
+                width={(cvsWidth / 2) - 10}  
+                height={(cvsWidth / 2)} 
+                x={(cvsWidth / 4) + 5} 
+                y={(cvsHeight/2 - (cvsWidth/4))} 
                 fill={showFront ? frontContent.tshirtColor : backContent.tshirtColor} 
                 listening={false} 
               />
 
-              <KonvaImage
-                image={tShirt}
-                width={100}
-                height={130}
-                x={10}
-                y={10} 
-                stroke="lightGrey"
-                strokeWidth={2} 
-                onClick={() => setShowFront(true)}
-              />
-
-              <KonvaImage
-                image={backTshirt}
-                width={100}
-                height={130}
-                x={10}
-                y={150} 
-                stroke="lightGrey"
-                strokeWidth={2} 
-                onClick={() => setShowFront(false)}
-              />
-              
-              <KonvaImage
-                image={showFront ? tShirt : backTshirt}
-                width={600}
-                height={650}
-                x={(window.innerWidth / 2) / 2 - 300}
-                y={(window.innerHeight / 10 * 8) / 2 - 325} 
-              />
-
-              {showFront ? (frontContent.image.value && (
-                <KonvaImage
-                  image={frontContent.image.value}
-                  width={frontContent.image.width} 
-                  height={frontContent.image.height}
-                  x={imagePosition.x}
-                  y={imagePosition.y}
-                  draggable
-                  rotation={frontContent.image.rotation}
-                  onDragMove={handleDragMove} 
-                  onDragEnd={handleDragEnd}
-                />
-              )) : (backContent.image.value && (
-                <KonvaImage
-                  image={backContent.image.value}
-                  width={backContent.image.width} 
-                  height={backContent.image.height}
-                  x={imagePosition.x}
-                  y={imagePosition.y}
-                  draggable
-                  rotation={backContent.image.rotation}
-                  onDragMove={handleDragMove} 
-                  onDragEnd={handleDragEnd}
-                />
-              ))}
-
-              {showFront ? (frontContent.label.title && 
-                <Text
-                  draggable
-                  text={frontContent.label.tshirtLabel}
-                  fontSize={frontContent.label.fontSize}
-                  fill={frontContent.label.color}
-                  fontFamily={frontContent.label.fontFamily}
-                  x={(window.innerWidth / 2) / 2 - (frontContent.label.title.length * 10) / 2} 
-                  y={(window.innerHeight / 10 * 8) / 2 + 30} 
-                  rotation={frontContent.label.rotation}
-                />) : (backContent.label.title && 
-                <Text
-                  draggable
-                  text={backContent.label.tshirtLabel}
-                  fontSize={backContent.label.fontSize}
-                  fill={backContent.label.color}
-                  fontFamily={backContent.label.fontFamily}
-                  x={(window.innerWidth / 2) / 2 - (backContent.label.title.length * 10) / 2} 
-                  y={(window.innerHeight / 10 * 8) / 2 + 30} 
-                  rotation={backContent.label.rotationn}
-                />
-              )}
-
               <Rect
-                width={250} 
-                height={400}
-                x={(window.innerWidth / 2) / 2 - 130} 
-                y={(window.innerHeight / 10 * 8) / 2 - 220}
+                width={(cvsWidth / 5)}  
+                height={(cvsWidth / 4)} 
+                x={4*(cvsWidth / 2)/5} 
+                y={cvsHeight/2 - (cvsWidth/8) - 20} 
                 fill="transparent"
                 stroke="lightGrey"
                 strokeWidth={2} 
                 listening={false} 
               />
 
+              <KonvaImage
+                  image={showFront ? tShirt : backTshirt}
+                  width={(cvsWidth / 2)}  
+                  height={(cvsWidth / 2)} 
+                  x={(cvsWidth / 4)} 
+                  y={(cvsHeight/2 - (cvsWidth/4))} 
+              />
+
+              {currentImage.value && (
+              <KonvaImage
+                image={currentImage.value}
+                width={currentImage.width}
+                height={currentImage.height}
+                x={currentImage.x}
+                y={currentImage.y}
+                rotation={currentImage.rotation}
+                draggable
+                onDragEnd={(e) => handleDragEnd(e, 'img')} 
+                onDragMove={(e) => {setImageNode(e.target);}} 
+                onTransform={handleTransform} 
+                onClick={handleImageClick}
+                ref={(node) => {
+                  if (node) {
+                    setImageNode(node); 
+                  }
+                }} />
+              )}
+        
+              {showTrasformer && imageNode && (
+                <Transformer
+                  nodes={[imageNode]} 
+                  padding={5}
+                  flipEnabled={false}
+                  enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']} 
+                  boundBoxFunc={(oldBox, newBox) => {
+                    if (Math.abs(newBox.width) < 20 || Math.abs(newBox.height) < 20) {
+                      return oldBox;
+                    }
+                    return newBox; 
+                  }}
+                />
+              )}
+
+
+              {currentLabel && currentLabel.title && currentLabel.title.length>0 && 
+                <Text
+                  draggable
+                  text={currentLabel.tshirtLabel}
+                  fontSize={currentLabel.fontSize}
+                  fill={currentLabel.color}
+                  fontFamily={currentLabel.fontFamily}
+                  x={currentLabel.x} 
+                  y={currentLabel.y} 
+                  rotation={currentLabel.rotation}
+                  onTransform={handleLabelTransform}
+                  onClick={() => setShowTransformerL(true)}
+                  onDragEnd={(e) => handleDragEnd(e, 'label')} 
+                  onDragMove={(e) => setLabelNode(e.target)} 
+                />
+              }
+
+              {labelNode && showTrasformerL && (
+                <Transformer
+                  nodes={[labelNode]} // Assign the image node to the transformer
+                  padding={5}
+                  flipEnabled={false}
+                  enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']} // Enable all corners for resizing
+                  boundBoxFunc={(oldBox, newBox) => {
+                    if (Math.abs(newBox.width) < 20 || Math.abs(newBox.height) < 20) {
+                      return oldBox; // Prevent resizing below the minimum dimensions
+                    }
+                    return newBox; // Allow resizing
+                  }}
+                />
+              )}
+
+              <KonvaImage
+                image={tShirt}
+                width={100}
+                height={100}
+                x={10}
+                y={10} 
+                stroke="lightGrey"
+                strokeWidth={3} 
+                onClick={() => {setShowFront(true); setShowTransformer(false); setShowTransformerL(false);}}
+              />
+
+              <KonvaImage
+                image={backTshirt}
+                width={100}
+                height={100}
+                x={10}
+                y={120} 
+                stroke={"lightGrey"}
+                strokeWidth={3} 
+                onClick={() => {setShowFront(false); setShowTransformer(false); setShowTransformerL(false);}}
+              />
+
             </>
           )}
-        </Layer>
-      </Stage>
+          </Layer>
+        </Stage>
       </div>
-      <ManageFiles 
-      setColor={(c) => {
-        setFrontContent({...frontContent, tshirtColor: c}); setBackContent({...backContent, tshirtColor: c})
-      }} 
-      image={showFront ? frontContent.image.value.src : backContent.image.value.src}
+      <ManageFiles  
+        setColor={(c) => {
+          setFrontContent({...frontContent, tshirtColor: c}); setBackContent({...backContent, tshirtColor: c})
+        }} 
+        image={showFront ? frontContent.image.value.src : backContent.image.value.src}
        />
     </div>
   );
