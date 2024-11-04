@@ -9,7 +9,6 @@ import Contact from './Components/ContactPage/Contact'
 import Footer from './Components/Footer/Footer'
 import Canvas from './Components/Canvas/Canvas'
 import Designer from './Components/Designer/Designer'
-import ResizableText from './Components/Resize/Resize'
 
 const App = () => {
   const location = useLocation();
