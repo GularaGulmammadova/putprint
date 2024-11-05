@@ -1,4 +1,12 @@
+.textarea {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+}
 
+.label {
+    color: grey;
+    margin: 10px;
+}
 
 .container {
     width: 100%;

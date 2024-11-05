@@ -38,8 +38,12 @@ const ManageFiles = ({setColor}) => {
           <h3 className={styles.title}>Ümümi Qiymət</h3>
           <h3 className={styles.title}>25 AZN</h3>
         </div>
-
+        
         <button className={styles.orderBtn}>Sifariş et</button>
+      </div>
+
+      <div className={styles.warning}>
+        <h3>{`! Don't go out of the borders`}</h3>
       </div>
     </div>
   )

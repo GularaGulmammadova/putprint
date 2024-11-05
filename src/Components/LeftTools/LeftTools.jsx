@@ -8,10 +8,10 @@ import styles from './LeftTools.module.css';
 import FontFamilyDropDown from '../FontFamilyDropDown/FontFamilyDropDown';
 import AI from '../AI/AI';
 
-const LeftTools = ({ setContent, content, deleteImg, handleImageChange }) => {
+const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowTransformer }) => {
 
     const [chosen, setChosen] = useState('Yüklə');
-    const fileInputRef = useRef(null); // Create a ref for the file input
+    const fileInputRef = useRef(null);
 
     const handleFileButtonClick = () => {
         fileInputRef.current.click(); 
@@ -19,11 +19,11 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange }) => {
 
     const deleteImgAndFile = () => {
         deleteImg();
-        fileInputRef.current.value = null; // Clear the file input
+        fileInputRef.current.value = null; 
     }
 
     return (
-        <div className={styles.column}>
+        <div  className={styles.column}>
             <div className={styles.btns}>
                 <button onClick={() => setChosen('Yazı')} className={chosen!=='Yazı' ? styles.chosen : styles.btn}>{/*<FontAwesomeIcon icon={faTextHeight} />*/} Yazı</button>
                 <button onClick={() => setChosen('Yüklə')} className={chosen!=='Yüklə' ? styles.chosen : styles.btn}>{/*<FontAwesomeIcon icon={faArrowUpFromBracket} />*/} Yüklə</button>
@@ -40,19 +40,19 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange }) => {
                             <img className={styles.img} src={content.image.value.src} alt='file image' />
                                
                             <div className={styles.text}>
-                                <p className={styles.title}>Image 1</p>
+                                <p className={styles.title}>Image 1</p> 
                                 <div className={styles.flex}>  
                                     <div className={styles.col}>
                                         <h3 className={styles.title}>Width</h3>  
-                                        <input value={Math.round(content.image.width, 1)} onChange={(e) => setContent({...content, image: {...content.image, width: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />                            
+                                        <input disabled value={Math.round(content.image.width, 1)} onChange={(e) => {setShowTransformer(false);setContent({...content, image: {...content.image, width: e.target.value}})}} min={10}  className={styles.input} type='number'  />                            
                                     </div>
                                     <div className={styles.col}>
                                         <h3 className={styles.title}>Height</h3>  
-                                        <input value={Math.round(content.image.height, 1)} onChange={(e) => setContent({...content, image: {...content.image, height: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />
+                                        <input disabled value={Math.round(content.image.height, 1)} onChange={(e) => setContent({...content, image: {...content.image, height: e.target.value}})} min={10}  className={styles.input} type='number' />
                                     </div>
                                     <div className={styles.col}>
                                         <h3 className={styles.title}>Rotation</h3>  
-                                        <input defaultValue={Math.round(content.image.rotation, 1)} onChange={(e) => setContent({...content, image: {...content.image, rotation: e.target.value}})} min={0} max={360} className={styles.input} type='number' placeholder='10' />
+                                        <input disabled defaultValue={Math.round(content.image.rotation, 1)} onChange={(e) => setContent({...content, image: {...content.image, rotation: e.target.value}})} min={0} max={360} className={styles.input} type='number'  />
                                     </div>
                                 </div>
                             </div>

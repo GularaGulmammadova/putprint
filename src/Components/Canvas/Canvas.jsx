@@ -186,7 +186,7 @@ const Canvas = ({frontSide, backSide}) => {
     if (imageSrc) {
       const img = new Image();
       img.src = imageSrc;
-      setFrontContent({...frontContent, image: {...frontContent.image, value: img}});
+      setFrontContent({...frontContent, image: {...frontContent.image, value: img, height: currentImage.width * img.naturalHeight / img.naturalWidth}});
     }
 
   }, [imageSrc, showFront]);
@@ -206,6 +206,7 @@ const Canvas = ({frontSide, backSide}) => {
   return (
     <div className={styles.flex}>
       <LeftTools 
+        setShowTransformer={setShowTransformer}
         setContent={showFront ? setFrontContent : setBackContent}
         content={showFront ? frontContent : backContent}
         deleteImg={() => {
@@ -278,7 +279,6 @@ const Canvas = ({frontSide, backSide}) => {
                   nodes={[imageNode]} 
                   padding={5}
                   flipEnabled={false}
-                  enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']} 
                   boundBoxFunc={(oldBox, newBox) => {
                     if (Math.abs(newBox.width) < 20 || Math.abs(newBox.height) < 20) {
                       return oldBox;
@@ -308,15 +308,15 @@ const Canvas = ({frontSide, backSide}) => {
 
               {labelNode && showTrasformerL && (
                 <Transformer
-                  nodes={[labelNode]} // Assign the image node to the transformer
+                  nodes={[labelNode]} 
                   padding={5}
                   flipEnabled={false}
-                  enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']} // Enable all corners for resizing
+                  enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']} 
                   boundBoxFunc={(oldBox, newBox) => {
                     if (Math.abs(newBox.width) < 20 || Math.abs(newBox.height) < 20) {
-                      return oldBox; // Prevent resizing below the minimum dimensions
+                      return oldBox; 
                     }
-                    return newBox; // Allow resizing
+                    return newBox; 
                   }}
                 />
               )}

@@ -13,6 +13,8 @@
     border-color: #ff800b;
 }
 
+
+
 .hr {
     color: #c9c9c9;
     margin-bottom: 20px;
@@ -121,6 +123,14 @@
     height: 30px;
 }
 
+.warning {
+    padding: 20px;
+    border: 1px solid #c05151;
+    margin-top: 20px;
+    color: #c05151;
+    border-radius: 10px;
+    background-color: white;
+}
 
 @media only screen and (max-width: 1600px) {
     .heading {
