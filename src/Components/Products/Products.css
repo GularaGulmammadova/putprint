@@ -149,7 +149,7 @@ hr {
 
 .product-card {
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .product-card .hover-img {

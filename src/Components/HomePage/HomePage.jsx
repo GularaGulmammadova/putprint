@@ -241,7 +241,7 @@ const HomePage = () => {
                 <img src={white_hoodie7} alt="" />
               </div>
               <hr />
-              <div className="home-product-name">Kapüşonlu Sviter</div>
+              <div className="home-product-name">Kapşonlu Sviter</div>
               <div className="home-detail">
                 <div className="home-colors">
                   <div
@@ -307,13 +307,53 @@ const HomePage = () => {
     window.open("https://www.instagram.com/atlaz.wear?igsh=MWU5bnV1ejVjbWVkbw%3D%3D&utm_source=qr", "_blank"); 
   }}
 >
-  <div className="home-page-logos">
-          <img src={homepagelogo} alt="" />
-          <img src={homepagelogo} alt="" />
-          <img src={homepagelogo} alt="" />
-          <img src={homepagelogo} alt="" />
-          <img src={homepagelogo} alt="" />
-        </div></Link>
+  <div className="slider-logos">
+    <div className="slide-track">
+         <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img" />
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+          <div className="slide">
+          <img src={homepagelogo} alt="" className="slide-img"/>
+          </div>
+        </div>
+        </div>
+        </Link>
       </div>
     </div>
   );
