@@ -21,7 +21,7 @@ function Footer() {
                 <ul>
                     <li><Link to="/products">Məhsullar</Link></li>
                     <li><Link to="/productdetail/2">T-shirt</Link></li>
-                    <li><Link to="/productdetail/3">Kapüşonlu Sviter</Link></li>
+                    <li><Link to="/productdetail/3">Kapşonlu Sviter</Link></li>
                     <li><Link to="/productdetail/4">Sviter</Link></li>
                     <li><Link to="/productdetail/6">Ekoçanta</Link></li>
                 </ul>
@@ -35,8 +35,8 @@ function Footer() {
             <div className="footer-column" id='contact'>
                 <ul >
                     <li><Link to="/contact">Əlaqə</Link></li>
-                    <li><Link to="/">+994506976357</Link></li>
-                    <li><Link to="/">putandprint@gmail.com </Link></li>
+                    <li><span>+994506976357</span></li>
+                    <li><span>putandprint@gmail.com</span></li>
                 </ul>
             </div>
             <div className="footer-column">
