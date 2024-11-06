@@ -11,7 +11,7 @@ const AI = () => {
             <div className={styles.img}></div>
             <div className={styles.img}></div>
         </div>
-        <h3 className={styles.label}>Add your propt:</h3>
+        <h3 className={styles.label}>Add your prompt:</h3>
         <textarea className={styles.textarea} />
         <button className={styles.btn}>AI ilə yarat</button>
     </div>
