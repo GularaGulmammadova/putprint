@@ -8,10 +8,14 @@ import sweater from "../site assets/sweater/black/ui kart/sweater_b_ui.png";
 import white_sweater from "../site assets/sweater/white/ui kart/sweater_w_ui.png";
 import cap from "../site assets/cap/cap.png";
 import bag from "../site assets/eco bag/ui cardd/eco-bag.png";
-
+ 
 const products = [
   {
     id: 1,
+    front: '/W_F.png',
+    back: '/W_B.png',
+    blackFront: '/B_F.png',
+    blackBack: '/B_B.png',
     name: "Oversize T-shirt",
     images: {
       main: white_tshirt,
@@ -29,6 +33,10 @@ const products = [
   {
     id: 2,
     name: "T-shirt",
+    front: '/t_shirt_W_F.png',
+    back: '/t_shirt_W_B.png',
+    blackFront: '/t_shirt_B_F.png',
+    blackBack: '/t_shirt_B_B.png',
     images: {
       main: w_tshirt,
       hover: b_tshirt,
@@ -44,6 +52,10 @@ const products = [
   },
   {
     id: 3,
+    front: '/hoodie_W_F.png',
+    back: '/hoodie_W_B.png',
+    blackFront: '/hoodie_B_F.png',
+    blackBack: '/hoodie_B_B.png',
     name: "Kapşonlu Sviter",
     images: {
       main: hoodie,
@@ -62,6 +74,10 @@ const products = [
   },
   {
     id: 4,
+    front: '/sweater_W_F.png',
+    back: '/sweater_W_B.png',
+    blackFront: '/sweater_B_F.png',
+    blackBack: '/sweater_B_B.png',
     name: "Sviter",
     images: {
       main: white_sweater,
@@ -80,6 +96,8 @@ const products = [
   },
   {
     id: 5,
+    front: '/cap_white.png',
+    blackFront: '/cap_b.png',
     name: "Kepka",
     images: {
       main: cap,
@@ -95,6 +113,8 @@ const products = [
   },
   {
     id: 6,
+    front: '/front.png',
+    back: '/back.png',
     name: "Eko Çanta",
     images: {
       main: bag,

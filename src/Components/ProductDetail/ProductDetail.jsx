@@ -135,7 +135,7 @@ const ProductDetail = () => {
             )}
             <div className="product-price">
               <span>{product.price}</span>
-              <Link to="/designer"><button className="start-design-button">Dizayna başla</button></Link>
+              <Link to={`/designer/${id}`}><button className="start-design-button">Dizayna başla</button></Link>
             </div>
           </div>
         </div>

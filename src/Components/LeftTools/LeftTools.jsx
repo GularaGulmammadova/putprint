@@ -33,12 +33,12 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                 <div className={chosen==='Yüklə' ? styles.choiceImg : styles.none}>
                     <h3 className={styles.title}>Şəkil seçin</h3>
                     <input ref={fileInputRef} id="fileInput" onChange={(e) => handleImageChange(e)} className={styles.none} type='file' />
-                    <button onClick={handleFileButtonClick} className={styles.btn}>Şəkil əlavə edin</button>
+                    <button onClick={handleFileButtonClick} className={styles.btn}>Şəkil seçin</button>
 
                     {content.image.value && content.image.value.src.length > 0 && <div className={styles.file}>
                         <div className={styles.imgAndTitle}>
                             <img className={styles.img} src={content.image.value.src} alt='file image' />
-                               
+                            
                             <div className={styles.text}>
                                 <p className={styles.title}>Şəkil 1</p> 
                                 <div className={styles.flex}>  
@@ -74,7 +74,6 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
 
             <h3 className={styles.title}>Rəng seçin</h3>
             <ColorPicker type='tshirt' setColor={(c) => setContent({...content, label: {...content.label, color: c}})} />
-            
             <h3 className={styles.title}>Şrift ölçüsünü seçin </h3>
             <input defaultValue={content.label.fontSize} onChange={(e) => setContent({...content, label: {...content.label, fontSize: e.target.value}})} min={10} max={100} className={styles.input} type='number' placeholder='10' />
             

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { Profiler } from 'react'
+import React, { Profiler, useEffect, useState } from 'react'
 import Nav from './Components/Nav/Nav'
 import Products from './Components/Products/Products'
 import ProductDetail from './Components/ProductDetail/ProductDetail'
-import { Route, Routes, useLocation } from 'react-router'
+import { Route, Routes, useLocation, useParams } from 'react-router'
 import About from './Components/About/About'
 import Contact from './Components/ContactPage/Contact'
 import Footer from './Components/Footer/Footer'
@@ -12,8 +12,9 @@ import Corporate from './Components/Corporate/Corporate'
 import ScrollToTop from './ScrollToTop/ScrollToTop'
 import ProductCheck from './Components/ProductCheck/ProductCheck'
 import Designer from './Components/Designer/Designer'
-
+ 
 const App = () => {
+
   const location = useLocation();
 
   return (
@@ -28,7 +29,7 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/productcheck' element={<ProductCheck/>}/>
-        <Route path='/designer' element={<Designer frontSide='/crew_front.png' backSide='/crew_back.png' />}/>
+        <Route path='/designer/:id' element={<Designer />}/>
       </Routes>
       {!location.pathname.includes('/designer') && <Footer />}
     </div>
