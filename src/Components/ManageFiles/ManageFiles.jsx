@@ -3,7 +3,7 @@ import styles from './ManageFiles.module.css'
 import ColorPicker from '../ColorPicker/ColorPicker'
 import { useState } from 'react'
 
-const ManageFiles = ({setColor}) => {
+const ManageFiles = ({setColor, productName}) => {
 
   const [size, setSize] = useState('S');
   const [material, setMaterial] = useState('Nazik');
@@ -21,8 +21,10 @@ const ManageFiles = ({setColor}) => {
       <div className={styles.picker}>
         <h2 className={styles.heading}>Oversize T-shirt</h2>
         <hr className={styles.hr} />
-        <h3 className={styles.title}>Məhsul rəngi</h3>  
-        <ColorPicker setColor={setColor} />
+        {productName!=="Eko Çanta" && <>
+          <h3 className={styles.title}>Məhsul rəngi</h3>  
+          <ColorPicker setColor={setColor} />
+        </>}
 
         <h3 className={styles.title}>Ölçü</h3>   
         <div className={styles.btns}>
@@ -37,7 +39,7 @@ const ManageFiles = ({setColor}) => {
         <div className={styles.spaceBetween}>
           <h3 className={styles.title}>Ümümi Qiymət</h3>
           <h3 className={styles.title}>25 AZN</h3>
-        </div>
+        </div> 
         
         <button className={styles.orderBtn}>Sifariş et</button>
       </div>

@@ -5,7 +5,7 @@ import LeftTools from "../LeftTools/LeftTools";
 import ManageFiles from "../ManageFiles/ManageFiles";
 import { Transformer, Stage, Layer, Image as KonvaImage, Text, Rect } from 'react-konva';
 
-const Canvas = ({frontSide, backSide}) => {
+const Canvas = ({product}) => {
   const [imageNode, setImageNode] = useState(null);
   const [labelNode, setLabelNode] = useState(null);
   const [cvsWidth, setCvsWidth] = useState(window.innerWidth / 2);
@@ -169,18 +169,40 @@ const Canvas = ({frontSide, backSide}) => {
   
 
   useEffect(() => {
-    const img = new window.Image();
-    img.src = frontSide; 
-    img.onload = () => {
-      setTshirt(img);
-    };
-
-    const backImg = new window.Image();
-    backImg.src = backSide;
-    backImg.onload = () => {
-      setBackTshirt(backImg)
+    if (product.front){
+      const img = new window.Image();
+      img.src = frontContent.tshirtColor === 'white' ? product.front : product.blackFront; 
+      img.onload = () => {
+        setTshirt(img);
+      }
     }
-  }, []); 
+
+    if (product.back){
+      const backImg = new window.Image();
+      backImg.src = backContent.tshirtColor === 'white' ? product.back : product.blackBack;
+      backImg.onload = () => {
+        setBackTshirt(backImg)
+      }
+    }
+  }, [product, frontContent, backContent]); 
+
+  // useEffect(() => {
+  //   if (product.front ){
+  //     const img = new window.Image();
+  //     img.src = product.front; 
+  //     img.onload = () => {
+  //       setTshirt(clothesImg);
+  //     }
+  //   }
+
+  //   if (product.back){
+  //     const backImg = new window.Image();
+  //     backImg.src = product.back;
+  //     backImg.onload = () => {
+  //       setBackTshirt(clothesImgBack)
+  //     }
+  //   }
+  // }, [clothesImg, clothesImgBack]); 
 
   useEffect(() => {
     if (imageSrc) {
@@ -217,6 +239,7 @@ const Canvas = ({frontSide, backSide}) => {
             setImageSrcBack('');
             setBackContent({...backContent, image: {...backContent.image, value: ''}})
           }
+          setImageNode(null);
         }}
         handleImageChange={showFront ? handleImageChange : handleBackImageChange} 
       />
@@ -225,26 +248,6 @@ const Canvas = ({frontSide, backSide}) => {
         <Layer>
             {tShirt && (
             <>
-
-              <Rect
-                width={(cvsWidth / 2) - 10}  
-                height={(cvsWidth / 2)} 
-                x={(cvsWidth / 4) + 5} 
-                y={(cvsHeight/2 - (cvsWidth/4))} 
-                fill={showFront ? frontContent.tshirtColor : backContent.tshirtColor} 
-                listening={false} 
-              />
-
-              <Rect
-                width={(cvsWidth / 5)}  
-                height={(cvsWidth / 4)} 
-                x={4*(cvsWidth / 2)/5} 
-                y={cvsHeight/2 - (cvsWidth/8) - 20} 
-                fill="transparent"
-                stroke="lightGrey"
-                strokeWidth={2} 
-                listening={false} 
-              />
 
               <KonvaImage
                   image={showFront ? tShirt : backTshirt}
@@ -321,6 +324,54 @@ const Canvas = ({frontSide, backSide}) => {
                 />
               )}
 
+              {product.name!=="Eko Çanta" && product.name!=="Kepka" && product.name!=="Kapşonlu Sviter" && 
+              <Rect
+                width={(cvsWidth / 5)}  
+                height={(cvsWidth / 4)} 
+                x={4*(cvsWidth / 2)/5} 
+                y={cvsHeight/2 - (cvsWidth/8) - 20} 
+                fill="transparent"
+                stroke="lightGrey"
+                strokeWidth={2} 
+                listening={false} 
+              /> }    
+
+              {product.name==="Kapşonlu Sviter" &&
+              <Rect
+                width={(cvsWidth / 6)}  
+                height={(cvsWidth / 6)} 
+                x={5*(cvsWidth / 2)/6} 
+                y={cvsHeight/2 - (cvsWidth/12) + 20} 
+                fill="transparent"
+                stroke="lightGrey"
+                strokeWidth={2} 
+                listening={false} 
+              /> } 
+              
+              {product.name==="Kepka" &&
+              <Rect
+                width={(cvsWidth / 6)}  
+                height={(cvsWidth / 6)} 
+                x={5*(cvsWidth / 2)/6} 
+                y={cvsHeight/2 - (cvsWidth/8)} 
+                fill="transparent"
+                stroke="lightGrey"
+                strokeWidth={2} 
+                listening={false} 
+              /> }  
+
+              {product.name==="Eko Çanta" &&
+              <Rect
+                width={(cvsWidth / 4)}  
+                height={(cvsWidth / 4)} 
+                x={3*(cvsWidth / 2)/4} 
+                y={cvsHeight/2 - (cvsWidth/24)} 
+                fill="transparent"
+                stroke="lightGrey"
+                strokeWidth={2} 
+                listening={false} 
+              /> } 
+
               <KonvaImage
                 image={tShirt}
                 width={100}
@@ -332,7 +383,7 @@ const Canvas = ({frontSide, backSide}) => {
                 onClick={() => {setShowFront(true); setShowTransformer(false); setShowTransformerL(false);}}
               />
 
-              <KonvaImage
+              {backTshirt && <KonvaImage
                 image={backTshirt}
                 width={100}
                 height={100}
@@ -341,7 +392,7 @@ const Canvas = ({frontSide, backSide}) => {
                 stroke={"lightGrey"}
                 strokeWidth={3} 
                 onClick={() => {setShowFront(false); setShowTransformer(false); setShowTransformerL(false);}}
-              />
+              />}
 
             </>
           )}
@@ -349,8 +400,10 @@ const Canvas = ({frontSide, backSide}) => {
         </Stage>
       </div>
       <ManageFiles  
+        productName={product.name}
         setColor={(c) => {
-          setFrontContent({...frontContent, tshirtColor: c}); setBackContent({...backContent, tshirtColor: c})
+          setFrontContent({...frontContent, tshirtColor: c}); setBackContent({...backContent, tshirtColor: c});
+          // setFrontContent({...frontContent, value: product.frontBlack,}); setBackContent({...backContent, value: product.backBlack})
         }} 
         image={showFront ? frontContent.image.value.src : backContent.image.value.src}
        />
