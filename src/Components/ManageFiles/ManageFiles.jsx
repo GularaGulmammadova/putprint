@@ -37,7 +37,7 @@ const ManageFiles = ({setColor, productName}) => {
         </div>
 
         <div className={styles.spaceBetween}>
-          <h3 className={styles.title}>Ümümi Qiymət</h3>
+          <h3 className={styles.title}>Ümumi Qiymət</h3>
           <h3 className={styles.title}>25 AZN</h3>
         </div> 
         
