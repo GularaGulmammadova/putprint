@@ -106,7 +106,6 @@ const products = [
       { color: "white", hex: "#DEDEDE" },
       { color: "black", hex: "#000000" },
     ],
-    sizeRange: "S-2XL",
     material: "2-3 iplik", 
     price: "15₼",
     description: "Şəxsi stilini ifadə etmək üçün mükəmməl aksesuar. Sadəliyi ilə fərq yaradır, günəşdən qorunmaq üçün ideal seçimdir və gündəlik tərzinə rahatlıqla əlavə edilə bilir.",
