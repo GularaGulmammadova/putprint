@@ -70,6 +70,8 @@ const products = [
     material: "2-3 iplik",
     threads: "2 iplik, 3 iplik",
     price: "40/45₼",
+    minPrice: "40₼",
+    maxPrice: "45₼",
     description: "Rahat və gündəlik stil üçün mükəmməl. Hər zaman əlinin altında olmasını istəyəcəyin bir parça! Sənə komfortu və sadəliyi təqdim edir."
   },
   {
@@ -92,6 +94,8 @@ const products = [
     threads: "2 iplik, 3 iplik",
     material: "2-3 iplik", 
     price: "35/40₼",
+    minPrice: "35₼",
+    maxPrice: "40₼",
     description: " Zərif və sadə görünüşü ilə rahatlıq təqdim edən bu sviter, istənilən havada sənə komfort gətirir. Yüksək keyfiyyətli toxuması sayəsində özünü həm isti, həm də rahat hiss edəcəksən."
   },
   {

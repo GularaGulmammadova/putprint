@@ -252,9 +252,9 @@ const Canvas = ({product}) => {
               <KonvaImage
                   image={showFront ? tShirt : backTshirt}
                   width={(cvsWidth / 2)}  
-                  height={(cvsWidth / 2)} 
+                  height={(cvsWidth / 2) * tShirt.naturalHeight / tShirt.naturalWidth} 
                   x={(cvsWidth / 4)} 
-                  y={(cvsHeight/2 - (cvsWidth/4))} 
+                  y={(cvsHeight/2 - (cvsWidth/4) * tShirt.naturalHeight / tShirt.naturalWidth)} 
               />
 
               {currentImage.value && (
@@ -400,7 +400,7 @@ const Canvas = ({product}) => {
         </Stage>
       </div>
       <ManageFiles  
-        productName={product.name}
+        product={product}
         setColor={(c) => {
           setFrontContent({...frontContent, tshirtColor: c}); setBackContent({...backContent, tshirtColor: c});
           // setFrontContent({...frontContent, value: product.frontBlack,}); setBackContent({...backContent, value: product.backBlack})
