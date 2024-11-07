@@ -47,7 +47,7 @@ const ManageFiles = ({setColor, product}) => {
       </div>
 
       <div className={styles.warning}>
-        <h3>{`! Don't go out of the borders`}</h3>
+        <h3>{`Çərçivədən kənarda qalan dizaynlar çap olunmayacaq!`}</h3>
       </div>
     </div>
   )
