@@ -336,12 +336,24 @@ const Canvas = ({product}) => {
                 listening={false} 
               /> }    
 
-              {product.name==="Kapşonlu Sviter" &&
+              {product.name==="Kapşonlu Sviter" && showFront &&
               <Rect
                 width={(cvsWidth / 6)}  
                 height={(cvsWidth / 6)} 
                 x={5*(cvsWidth / 2)/6} 
                 y={cvsHeight/2 - (cvsWidth/12) + 20} 
+                fill="transparent"
+                stroke="lightGrey"
+                strokeWidth={2} 
+                listening={false} 
+              /> } 
+
+              {product.name==="Kapşonlu Sviter" && !showFront &&
+              <Rect
+                width={(cvsWidth / 6)}  
+                height={(cvsWidth / 4)} 
+                x={5*(cvsWidth / 2)/6} 
+                y={cvsHeight/2 - (cvsWidth/12)} 
                 fill="transparent"
                 stroke="lightGrey"
                 strokeWidth={2} 
@@ -383,7 +395,7 @@ const Canvas = ({product}) => {
                 onClick={() => {setShowFront(true); setShowTransformer(false); setShowTransformerL(false);}}
               />
 
-              {backTshirt && <KonvaImage
+              {backTshirt && <KonvaImage 
                 image={backTshirt}
                 width={100}
                 height={100}
