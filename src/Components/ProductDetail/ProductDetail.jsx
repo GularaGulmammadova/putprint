@@ -1,32 +1,43 @@
-// eslint-disable-next-line no-unused-vars
-import React from "react";
-import { useEffect, useState } from "react";
+// eslint-disable-next-line no-unused-vars 
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import axios from "axios";
 import "./ProductDetail.css";
-import products from "../../Data/productsData";
 import { Link } from "react-router-dom";
-
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id));
-
+  const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [activeImage, setActiveImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState("");
   const [activeSize, setActiveSize] = useState("");
   const [activeThreads, setActiveThreads] = useState("");
+  const [error, setError] = useState(null);
+
 
   useEffect(() => {
-    if (product) {
-      setMainImage(product.images.main || "");
-      setSelectedColor(
-        product.colors && product.colors.length > 0
-          ? product.colors[0].color
-          : ""
-      );
-    }
-  }, [product]);
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(
+          `https://put-print-ky689.ondigitalocean.app/api/products/${id}/`
+        );
+        const productData = response.data;
+        setProduct(productData);
+        setMainImage(productData.images.main || "");
+        setSelectedColor(
+          productData.colors && productData.colors.length > 0
+            ? productData.colors[0].color
+            : ""
+        );
+      } catch (error) {
+        setError("Məhsulu yükləyərkən xəta baş verdi.");
+        console.error("Error fetching product:", error);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   const handleThumbnailClick = (image, index) => {
     setMainImage(image);
@@ -35,10 +46,12 @@ const ProductDetail = () => {
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
-    const colorProduct = products.find(
-      (p) => p.name === product.name && p.colors.some((c) => c.color === color)
-    );
-    setMainImage(colorProduct ? colorProduct.images.main : product.images.main);
+    if (product) {
+      const colorProduct = product.colors.find(
+        (c) => c.color === color
+      );
+      setMainImage(colorProduct ? colorProduct.image : product.images.main);
+    }
   };
 
   const handleSizeClick = (size) => {
@@ -49,15 +62,17 @@ const ProductDetail = () => {
     setActiveThreads(threads);
   };
 
-  const images = product
-    ? product.images.hover
-      ? [product.images.main, product.images.hover]
-      : [product.images.main]
-    : [];
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>Loading...</div>;
   }
+
+  const images = product.images?.hover
+    ? [product.images.main, product.images.hover]
+    : [product.images.main];
 
   return (
     <div className="container">
@@ -135,7 +150,9 @@ const ProductDetail = () => {
             )}
             <div className="product-price">
               <span>{product.price}</span>
-              <Link to={`/designer/${id}`}><button className="start-design-button">Dizayna başla</button></Link>
+              <Link to={`/designer/${id}`}>
+                <button className="start-design-button">Dizayna başla</button>
+              </Link>
             </div>
           </div>
         </div>
