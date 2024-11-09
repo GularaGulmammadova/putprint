@@ -150,7 +150,7 @@
 }
 
 .check-box-info .product-prices {
-  max-width: 171px;
+  /* max-width: 171px; */
   height: 32px;
   display: flex;
   flex-direction: row;
