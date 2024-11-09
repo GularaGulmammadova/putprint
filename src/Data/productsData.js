@@ -25,7 +25,7 @@ const products = [
       { color: "white", hex: "#DEDEDE" },
       { color: "black", hex: "#000000" },
     ],
-    sizeRange: "S-2XL",
+    sizeRange: "S-2XL", 
     sizes: "S, M, L, XL, 2XL",
     price: "35₼",
     description: "Gün üçün nəzərdə tutulmuş bu şık oversize köynək, sənə rahatlığı və zərifliyi eyni anda təqdim edir. Sadə dizaynı ilə müxtəlif stillərlə uyumlu olaraq gündəlik geyimə mükəmməl şəkildə əlavə olunur. Keyfiyyətli pambıq materialından hazırlanmış, nəfəs alaraq sənə gün boyu rahatlıq gətirir.",

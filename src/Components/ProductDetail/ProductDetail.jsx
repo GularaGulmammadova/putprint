@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars 
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
@@ -14,7 +14,6 @@ const ProductDetail = () => {
   const [activeSize, setActiveSize] = useState("");
   const [activeThreads, setActiveThreads] = useState("");
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -47,9 +46,7 @@ const ProductDetail = () => {
   const handleColorChange = (color) => {
     setSelectedColor(color);
     if (product) {
-      const colorProduct = product.colors.find(
-        (c) => c.color === color
-      );
+      const colorProduct = product.colors.find((c) => c.color === color);
       setMainImage(colorProduct ? colorProduct.image : product.images.main);
     }
   };
@@ -67,7 +64,36 @@ const ProductDetail = () => {
   }
 
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            border: "4px solid #f3f3f3",
+            borderTop: "4px solid #3498db",
+            borderRadius: "50%",
+            animation: "spin 1s linear infinite",
+          }}
+        ></div>
+
+        <style>
+          {`
+              @keyframes spin {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+              }
+          `}
+        </style>
+      </div>
+    );
   }
 
   const images = product.images?.hover

@@ -1,17 +1,33 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductCheck.css";
-import tshirt_oversize from "./../../site assets/t-shirt oversize/white/ui kart/tshirta.png";
+// import tshirt_oversize from "./../../site assets/t-shirt oversize/white/ui kart/tshirta.png";
+import { useParams } from "react-router";
+import axios from "axios";
 
 const ProductCheck = () => {
+  const { id } = useParams();
+  const [quantity, setQuantity] = useState(1);
 
-    const [quantity, setQuantity] = useState(1);
-  
-    const handleQuantityChange = (e) => {
-      setQuantity(e.target.value);
-    };
-  
-    const price = 35; 
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value);
+  };
+
+  const [data, setdata] = useState();
+  const getOrdering = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://put-print-ky689.ondigitalocean.app/api/products/${id}/`
+      );
+      setdata(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getOrdering(id);
+  }, [id]);
 
   return (
     <div className="container" style={{ width: "100%", maxWidth: "800px" }}>
@@ -20,12 +36,10 @@ const ProductCheck = () => {
         <hr style={{ border: "1px solid #DEDEDE" }} />
         <div className="check-boxes">
           <div className="product-check-item-image">
-            <img src={tshirt_oversize} alt="tshirt" />
+            <img src={data && data.images.main} alt="tshirt" />
           </div>
           <div className="check-boxes-desc">
-            <div className="check-box-title">
-              Oversize T-shirt 
-            </div>
+            <div className="check-box-title">{data && data.name}</div>
             <div className="check-boxes-options">
               <div className="check-boxes-option">
                 <label>Rəng</label>
@@ -48,7 +62,7 @@ const ProductCheck = () => {
             <div className="check-box-info">
               <div className="prices-title">Qiyməti</div>
               <div className="product-prices">
-                {price} ₼ ×
+                {data && data.price} ₼ ×
                 <input
                   type="number"
                   value={quantity}
@@ -57,7 +71,9 @@ const ProductCheck = () => {
                   min="1"
                   defaultValue="1"
                 />
-                <div className="product-totally-price">{price * quantity} ₼</div>
+                <div className="product-totally-price">
+                  {data && data.price * quantity} ₼
+                </div>
               </div>
             </div>
           </div>

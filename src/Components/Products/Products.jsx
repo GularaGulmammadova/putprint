@@ -44,7 +44,7 @@ const Products = () => {
             <Link to={`/productdetail/${product.id}`} key={product.id}>
               <div className="product-card">
                 <div className="image">
-                  <img src={product.images.main} alt={product.name} />
+                  <img src={product.images.main} alt={product.name} /> 
                   {product.images.hover && (
                     <img
                       src={product.images.hover}
@@ -95,3 +95,4 @@ const Products = () => {
 };
 
 export default Products;
+

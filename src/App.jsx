@@ -28,7 +28,7 @@ const App = () => {
         <Route path='/productdetail/:id' element={<ProductDetail />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/productcheck' element={<ProductCheck/>}/>
+        <Route path='/productcheck/:id' element={<ProductCheck/>}/> 
         <Route path='/designer/:id' element={<Designer />}/>
       </Routes>
       {!location.pathname.includes('/designer') && <Footer />}
