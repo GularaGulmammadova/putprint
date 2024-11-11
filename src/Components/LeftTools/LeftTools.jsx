@@ -7,6 +7,8 @@ import styles from './LeftTools.module.css';
 // import SparclesIco from '../../icos/SparclesIco';
 import FontFamilyDropDown from '../FontFamilyDropDown/FontFamilyDropDown';
 import AI from '../AI/AI';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowTransformer }) => {
 
@@ -22,6 +24,35 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
         fileInputRef.current.value = null; 
     }
 
+    const handleSubmitImage = async (file) => {
+        const formData = new FormData();
+        formData.append('image', file); 
+        formData.append('asset_type', 'image');
+        formData.append('order_item', uuidv4());    
+        try {
+            const response = await axios.post('https://put-print-ky689.ondigitalocean.app/api/customizations/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log("Şəkil uğurla göndərildi:", response.data);
+        } catch (error) {
+            console.error("Şəkili göndərərkən səhv baş verdi:", error);
+            if (error.response) {
+                console.log("Server cavabı:", error.response.data); 
+            }
+        }
+    };
+    
+    
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            handleImageChange(e); 
+            handleSubmitImage(file); 
+        }
+    };
+
     return (
         <div  className={styles.column}>
             <div className={styles.btns}>
@@ -32,7 +63,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
             <div className={styles.container}>
                 <div className={chosen==='Yüklə' ? styles.choiceImg : styles.none}>
                     <h3 className={styles.title}>Şəkil seçin</h3>
-                    <input ref={fileInputRef} id="fileInput" onChange={(e) => handleImageChange(e)} className={styles.none} type='file' />
+                    <input ref={fileInputRef} id="fileInput" onChange={(e) => handleFileChange(e)} className={styles.none} type='file' />
                     <button onClick={handleFileButtonClick} className={styles.btn}>Şəkil seçin</button>
 
                     {content.image.value && content.image.value.src.length > 0 && <div className={styles.file}>

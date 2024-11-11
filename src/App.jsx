@@ -12,10 +12,21 @@ import Corporate from './Components/Corporate/Corporate'
 import ScrollToTop from './ScrollToTop/ScrollToTop'
 import ProductCheck from './Components/ProductCheck/ProductCheck'
 import Designer from './Components/Designer/Designer'
+// import Loading from './Components/Loading/Loading'
  
 const App = () => {
 
   const location = useLocation();
+
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 3000);
+  // }, []);
+
+  // if (loading) {
+  //   return <Loading/>;
+  // }
 
   return (
     <div>

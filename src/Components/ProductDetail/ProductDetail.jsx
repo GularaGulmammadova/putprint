@@ -67,6 +67,7 @@ const ProductDetail = () => {
     return (
       <div
         style={{
+          backgroundImage: "url(./../../site assets/logo and icons/SVG/Asset 10p&p.svg)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -75,10 +76,11 @@ const ProductDetail = () => {
       >
         <div
           style={{
-            width: "40px",
-            height: "40px",
-            border: "4px solid #f3f3f3",
-            borderTop: "4px solid #3498db",
+            width: "50px",
+            height: "50px",
+            border: "4px solid  rgba(255, 255, 255, 0.3)",
+            borderBottom: "4px solid #ae4559",
+            borderTop: "4px solid #f15620",
             borderRadius: "50%",
             animation: "spin 1s linear infinite",
           }}

@@ -4,9 +4,11 @@ import axios from "axios";
 import "./Products.css";
 import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -19,43 +21,31 @@ const Products = () => {
         console.error("Error fetching products:", error);
       }
     };
-
+    setTimeout(() => setLoading(false), 1100);
     fetchProducts();
   }, []);
 
 
-  if (!products) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <div
-          style={{
-            width: "40px",
-            height: "40px",
-            border: "4px solid #f3f3f3",
-            borderTop: "4px solid #3498db",
-            borderRadius: "50%",
-            animation: "spin 1s linear infinite",
-          }}
-        ></div>
-
-        <style>
-          {`
-              @keyframes spin {
-                  0% { transform: rotate(0deg); }
-                  100% { transform: rotate(360deg); }
-              }
-          `}
-        </style>
-      </div>
-    );
+  if (loading) {
+    return <Loading/>;
   }
+
+
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.get("https://put-print-ky689.ondigitalocean.app/api/products/?ordering=id");
+  //       setProducts(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching products:", error);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, []);
+
 
   return (
     <div className="container">

@@ -5,11 +5,13 @@ import contactimage from "./../../site assets/contactimage.png";
 
 function Contact() {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
-        contactNumber: '',
-        message: ''
+        phone: '',
+        message: '',
+        username: 'defaultName',
+        password: 'defaultPassword123'  
     });
 
     const handleChange = (e) => {
@@ -20,11 +22,51 @@ function Contact() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form Data Submitted:', formData);
+    
+        const uniqueUsername = `defaultName_${Math.floor(Math.random() * 900000) + 100000}`;
+        const formDataWithUniqueUsername = { ...formData, username: uniqueUsername };
+    
+        console.log('Form data:', formDataWithUniqueUsername);
+    
+        try {
+            const response = await fetch('https://put-print-ky689.ondigitalocean.app/api/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formDataWithUniqueUsername)
+            });
+    
+            if (response.ok) {
+                console.log('Form məlumatları uğurla göndərildi:', formDataWithUniqueUsername);
+                alert('Məlumatlar uğurla göndərildi');
+                setFormData({
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    phone: '',
+                    message: '',
+                    username: 'defaultName',
+                    password: 'defaultPassword123'
+                });
+            } else {
+                const errorData = await response.json();
+                console.error('Server xətası:', errorData);
+    
+                if (errorData.username && errorData.username.includes('User with this username already exists.')) {
+                    alert('Bu istifadəçi adı artıq mövcuddur. Yenidən cəhd edin.');
+                } else {
+                    alert('Məlumatlar göndərilərkən xəta baş verdi: ' + errorData.message || 'Naməlum xəta');
+                }
+            }
+        } catch (error) {
+            console.error('Xəta:', error);
+            alert('Xəta baş verdi. Zəhmət olmasa, yenidən cəhd edin.');
+        }
     };
+        
 
     return (
         <>
@@ -34,24 +76,24 @@ function Contact() {
                 <div className='contact-form'>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="firstName">Ad:</label>
+                            <label htmlFor="first_name">Ad:</label>
                             <input
                                 type="text"
-                                id="firstName"
-                                name="firstName"
-                                value={formData.firstName}
+                                id="first_name"
+                                name="first_name"
+                                value={formData.first_name}
                                 onChange={handleChange}
                                 placeholder='Adınızı daxil edin'
                                 required
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="lastName">Soyad:</label>
+                            <label htmlFor="last_name">Soyad:</label>
                             <input
                                 type="text"
-                                id="lastName"
-                                name="lastName"
-                                value={formData.lastName}
+                                id="last_name"
+                                name="last_name"
+                                value={formData.last_name}
                                 onChange={handleChange}
                                 placeholder='Soyadınızı daxil edin'
                                 required
@@ -70,12 +112,12 @@ function Contact() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="contactNumber">Telefon Nömrəsi:</label>
+                            <label htmlFor="contact_number">Telefon Nömrəsi:</label>
                             <input
-                                type="tel"
-                                id="contactNumber"
-                                name="contactNumber"
-                                value={formData.contactNumber}
+                                type="phone"
+                                id="phone"
+                                name="phone"
+                                value={formData.phone}
                                 onChange={handleChange}
                                 placeholder='Telefon nömrənizi daxil edin'
                                 required
