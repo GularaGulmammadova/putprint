@@ -67,7 +67,6 @@ const ProductDetail = () => {
     return (
       <div
         style={{
-          backgroundImage: "url(./../../site assets/logo and icons/SVG/Asset 10p&p.svg)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

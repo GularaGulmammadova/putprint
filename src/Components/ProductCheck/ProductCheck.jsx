@@ -4,6 +4,7 @@ import "./ProductCheck.css";
 // import tshirt_oversize from "./../../site assets/t-shirt oversize/white/ui kart/tshirta.png";
 import { useParams } from "react-router";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ProductCheck = () => {
   const { id } = useParams();
@@ -78,9 +79,21 @@ const ProductCheck = () => {
             </div>
           </div>
         </div>
-        <button className="checkout-btn">
-          <p className="checkout-text">Ödənişə keç</p>
-        </button>
+        <Link
+          to=""
+          onClick={(e) => {
+            e.preventDefault();
+            window.open(
+              "https://api.whatsapp.com/send?phone=994506976357&text=Salam%0AM%C9%99hsulun%20%C3%B6d%C9%99ni%C5%9Fini%20etm%C9%99k%20%C3%BC%C3%A7%C3%BCn%20yaz%C4%B1rd%C4%B1m%20%F0%9F%98%8A",
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }}
+        >
+          <button className="checkout-btn">
+            <p className="checkout-text">Ödənişə keç</p>
+          </button>
+        </Link>
       </div>
     </div>
   );
