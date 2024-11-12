@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Canvas.module.css";
 import LeftTools from "../LeftTools/LeftTools";
 import ManageFiles from "../ManageFiles/ManageFiles";
@@ -13,6 +13,8 @@ import {
 } from "react-konva";
 
 const Canvas = ({ product,id }) => {
+  const stageRef = useRef(null);
+
   const [imageNode, setImageNode] = useState(null);
   const [labelNode, setLabelNode] = useState(null);
   const [cvsWidth, setCvsWidth] = useState(window.innerWidth / 2);
@@ -45,6 +47,7 @@ const Canvas = ({ product,id }) => {
   const [imageSrcBack, setImageSrcBack] = useState(null);
 
   const [backContent, setBackContent] = useState({
+    screenshot: 'null',
     tshirtColor: "white",
     image: {
       value: "",
@@ -70,7 +73,7 @@ const Canvas = ({ product,id }) => {
 
   const [frontContent, setFrontContent] = useState({
     tshirtColor: "white",
-
+    screenshot: 'null',
     image: {
       value: "",
       width: cvsWidth / 8,
@@ -127,6 +130,67 @@ const Canvas = ({ product,id }) => {
 
     node.getLayer().batchDraw();
   };
+
+  
+  
+
+
+
+
+
+  // const createPDF = (frontBase64, backBase64) => {
+  //   const canvas = document.createElement('canvas');
+  //   const context = canvas.getContext('2d');
+    
+  //   const width = 595; 
+  //   const height = 842; 
+  //   canvas.width = width;
+  //   canvas.height = height;
+
+  //   const frontImage = new Image();
+  //   frontImage.src = frontBase64;
+  //   frontImage.onload = () => {
+  //     context.drawImage(frontImage, 0, 0, width, height);
+
+  //     const backCanvas = document.createElement('canvas');
+  //     backCanvas.width = width;
+  //     backCanvas.height = height;
+  //     const backContext = backCanvas.getContext('2d');
+
+  //     const backImage = new Image();
+  //     backImage.src = backBase64;
+  //     backImage.onload = () => {
+  //       backContext.drawImage(backImage, 0, 0, width, height);
+        
+  //       const pdfBlob = new Blob([
+  //         canvas.toDataURL('image/png'),
+  //         backCanvas.toDataURL('image/png')
+  //       ], { type: 'application/pdf' });
+
+  //       const link = document.createElement('a');
+  //       link.href = URL.createObjectURL(pdfBlob);
+  //       link.download = 'screenshot.pdf';
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       document.body.removeChild(link);
+  //     };
+  //   };
+  // };
+
+  // const handleDownload = () => {
+  //   createPDF(frontContent.screenshot, backContent.screenshot);
+  // };
+
+  const captureScreenshot = () => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const dataURL = stage.toDataURL(); 
+    
+    console.log('Base64 Image:', dataURL);
+    return dataURL;
+  };
+
 
   const handleLabelTransform = (e) => {
     const node = e.target;
@@ -246,24 +310,6 @@ const Canvas = ({ product,id }) => {
     }
   }, [product, frontContent, backContent]);
 
-  // useEffect(() => {
-  //   if (product.front ){
-  //     const img = new window.Image();
-  //     img.src = product.front;
-  //     img.onload = () => {
-  //       setTshirt(clothesImg);
-  //     }
-  //   }
-
-  //   if (product.back){
-  //     const backImg = new window.Image();
-  //     backImg.src = product.back;
-  //     backImg.onload = () => {
-  //       setBackTshirt(clothesImgBack)
-  //     }
-  //   }
-  // }, [clothesImg, clothesImgBack]);
-
   useEffect(() => {
     if (imageSrc) {
       const img = new Image();
@@ -295,6 +341,35 @@ const Canvas = ({ product,id }) => {
   const currentImage = showFront ? frontContent.image : backContent.image;
   const currentLabel = showFront ? frontContent.label : backContent.label;
 
+  const submitDesign = () => {
+    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+    console.log([frontContent.screenshot, backContent.screenshot]); 
+    return [frontContent.screenshot, backContent.screenshot];
+  }
+
+  const downloadDesign = () => {
+    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+
+    const base64Images = submitDesign()
+    base64Images && base64Images.length>0 && base64Images.forEach((base64String, index) => {
+      if (base64String!==null && base64String!==undefined && base64String && typeof base64String === 'string'){
+        const link = document.createElement('a');
+        link.href = base64String; 
+        link.download = `image_${index + 1}.png`;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  };
+
+
+  useEffect(() => {
+    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+    
+  }, [frontContent, backContent])
+
   return (
     <div className={styles.flex}>
       <LeftTools
@@ -321,8 +396,8 @@ const Canvas = ({ product,id }) => {
           showFront ? handleImageChange : handleBackImageChange
         }
       />
-      <div className={styles.canvas}>
-        <Stage width={cvsWidth} height={cvsHeight}>
+      <div id='cvs' className={styles.canvas}>
+        <Stage width={cvsWidth} height={cvsHeight} ref={stageRef}>
           <Layer>
             {tShirt && (
               <>
@@ -502,6 +577,7 @@ const Canvas = ({ product,id }) => {
                     setShowFront(true);
                     setShowTransformer(false);
                     setShowTransformerL(false);
+                    setBackContent({...backContent, screenshot: captureScreenshot()});
                   }}
                 />
 
@@ -518,6 +594,7 @@ const Canvas = ({ product,id }) => {
                       setShowFront(false);
                       setShowTransformer(false);
                       setShowTransformerL(false);
+                      setFrontContent({...frontContent, screenshot: captureScreenshot()});
                     }}
                   />
                 )}
@@ -529,14 +606,16 @@ const Canvas = ({ product,id }) => {
       <ManageFiles
         id={id}
         product={product}
+        // handleDownload={handleDownload}
         setColor={(c) => {
           setFrontContent({ ...frontContent, tshirtColor: c });
           setBackContent({ ...backContent, tshirtColor: c });
-          // setFrontContent({...frontContent, value: product.frontBlack,}); setBackContent({...backContent, value: product.backBlack})
         }}
         image={
           showFront ? frontContent.image.value.src : backContent.image.value.src
         }
+        submitDesign={submitDesign}
+        downloadDesign={downloadDesign}
       />
     </div>
   );
