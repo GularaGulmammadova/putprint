@@ -51,6 +51,18 @@
   border-radius: 6px;
 }
 
+.product-check-item-image img {
+  object-fit: cover; 
+}
+
+.product-check-item-image img.front-image {
+  height: 190px; 
+}
+
+.product-check-item-image img.main-image {
+  height: 132px; 
+}
+
 .check-boxes .delete-btn {
   width: 24px;
   font-size: 18px;

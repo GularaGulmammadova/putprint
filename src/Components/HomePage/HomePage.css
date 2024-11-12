@@ -147,7 +147,7 @@ hr {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 272px;
+  width: 278px;
   height: 390px;
   justify-content: center;
   align-items: stretch;
@@ -255,7 +255,7 @@ hr {
 }
 
 .home-product-card .home-price span {
-  margin-right: 42px;
+  margin-right: 26px;
 }
 
 .home-product-card .home-product-name {
@@ -264,7 +264,7 @@ hr {
   font-size: 18px;
   font-weight: 400;
   line-height: 21.94px;
-  padding-inline: 22px;
+  padding-inline: 15px;
 }
 
 .home-product-card .home-design-button {

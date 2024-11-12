@@ -21,31 +21,13 @@ const Products = () => {
         console.error("Error fetching products:", error);
       }
     };
-    setTimeout(() => setLoading(false), 1100);
+    setTimeout(() => setLoading(false), 1500);
     fetchProducts();
   }, []);
 
-
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
-
-
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axios.get("https://put-print-ky689.ondigitalocean.app/api/products/?ordering=id");
-  //       setProducts(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching products:", error);
-  //     }
-  //   };
-
-  //   fetchProducts();
-  // }, []);
-
 
   return (
     <div className="container">
@@ -64,12 +46,16 @@ const Products = () => {
           />
         </div>
         <div className="product-cards">
-          {products.map((product) => (
+          {products.slice(0, 6).map((product) => ( 
             <Link to={`/productdetail/${product.id}`} key={product.id}>
               <div className="product-card">
                 <div className="image">
-                  <img src={product.images.main} alt={product.name} /> 
-                  {product.images.hover && (
+                  {product.images?.main ? (
+                    <img src={product.images.main} alt={product.name} />
+                  ) : (
+                    <p>No Image Available</p>
+                  )}
+                  {product.images?.hover && (
                     <img
                       src={product.images.hover}
                       alt={product.name}
@@ -103,7 +89,7 @@ const Products = () => {
                 </div>
                 <div className="desc">
                   <div className="price">
-                    <span>{product.price}</span>
+                    <span>{product.price}₼</span>
                     <Link to="/products">
                       <button className="design-button">Dizayn et</button>
                     </Link>
@@ -119,4 +105,3 @@ const Products = () => {
 };
 
 export default Products;
-

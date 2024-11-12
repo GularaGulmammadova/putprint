@@ -1,358 +1,131 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.css";
-import black_hoodie1 from "./../../site assets/newproducts/hoodieblack1.png";
-import white_hoodie1 from "./../../site assets/newproducts/hoodiewhite1.png";
-import black_hoodie2 from "./../../site assets/newproducts/hoodieblack2.png";
-import white_hoodie2 from "./../../site assets/newproducts/hoodiewhite2.png";
-import black_hoodie3 from "./../../site assets/newproducts/hoodieblack3.png";
-import white_hoodie3 from "./../../site assets/newproducts/hoodiewhite3.png";
-import black_hoodie4 from "./../../site assets/newproducts/hoodieblack4.png";
-import white_hoodie4 from "./../../site assets/newproducts/hoodiewhite4.png";
-import black_hoodie5 from "./../../site assets/newproducts/hoodieblack5.png";
-import white_hoodie5 from "./../../site assets/newproducts/hoodiewhite5.png";
-import black_hoodie6 from "./../../site assets/newproducts/hoodieblack6.png";
-import white_hoodie6 from "./../../site assets/newproducts/hoodiewhite6.png";
-import black_hoodie7 from "./../../site assets/newproducts/hoodieblack7.png";
-import white_hoodie7 from "./../../site assets/newproducts/hoodiewhite7.png";
-import black_hoodie8 from "./../../site assets/newproducts/hoodieblack8.png";
-import white_hoodie8 from "./../../site assets/newproducts/hoodiewhite8.png";
-import size from "./../../site assets/logo and icons/size.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import homepageclothing from "./../../site assets/homepageclothing.png";
 import homepagelogo from "./../../site assets/homepagelogo.png";
-// import ProductCheck from "../ProductCheck/ProductCheck";
+import axios from "axios";
 
 const HomePage = () => {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}, [])
+    axios
+      .get(
+        "https://put-print-ky689.ondigitalocean.app/api/products/?ordering=id"
+      )
+      .then((response) => {
+        const filteredProducts = response.data.filter(
+          (product) => product.id >= 7 && product.id <= 14
+        );
+        setProducts(filteredProducts);
+      })
+      .catch((error) => console.error("Error fetching products:", error));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const handleOrderClick = (productId) => {
+    navigate(`/productcheck/${productId}`);
+  };
 
   return (
     <div className="container">
       <div className="home-row">
         <div className="home-row-text">
-          <p>
-          Öz  tərzini yarat
-          </p>
-          <p>Etdiyin dizaynlarla fərqini göstər!
-          </p>
-        <Link to="/products"><button className="home-page-btn">Dizayna Başla</button></Link>
+          <p>Öz tərzini yarat</p>
+          <p>Etdiyin dizaynlarla fərqini göstər!</p>
+          <Link to="/products">
+            <button className="home-page-btn">Dizayna Başla</button>
+          </Link>
         </div>
         <div className="home-row-images">
-          <img src={homepageclothing} alt="" />
+          <img src={homepageclothing} alt="homepage clothing" />
         </div>
       </div>
-      <div className="home-page-part2" >
+      <div className="home-page-part2">
         <p>AtlazWear – dan kolleksiyalar</p>
         <div className="home-product-cards">
-        <Link to="/productcheck">
-            <div className="home-product-card">
-              <div className="image">
-              <img src={black_hoodie1} alt="" className="hover-img" />
-              <img src={white_hoodie1} alt="" />
-              </div>
+          {products.map((product) => (
+            <div key={product.id} className="home-product-card">
+              <Link to={`/productcheck/${product.id}`}>
+                <div className="image">
+                  <img
+                    src={product.black_front || "default-image-url.jpg"}
+                    alt="Product Image"
+                    className="hover-img"
+                  />
+                  <img
+                    src={product.front || "default-image-url.jpg"}
+                    alt="Product Image"
+                  />
+                </div>
+              </Link>
               <hr />
-              <div className="home-product-name">Kapşonlu Sviter</div>
+              <div className="home-product-name">{product.name}</div>
               <div className="home-detail">
-                <div className="home-colors">
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#DEDEDE" }}
-                  ></div>
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#000000" }}
-                  ></div>
+                {product.colors && product.colors.length > 0 && (
+                  <div className="home-colors">
+                    {product.colors.map((color) => (
+                      <div
+                        key={color.color}
+                        data-color={color.color}
+                        className="color"
+                        style={{ backgroundColor: color.hex }}
+                      ></div>
+                    ))}
+                  </div>
+                )}
+                <div className="size">
+                  <span>{product.sizeRange}</span>
                 </div>
-                <div className="home-size">
-                  <span>/</span> <img src={size} alt="" /> S-2XL
-                </div>
+                {product.material && (
+                  <div className="material">
+                    <span>{product.material}</span>
+                  </div>
+                )}
               </div>
               <div className="home-desc">
                 <div className="home-price">
-                  <span>48₼</span>
-                  <button className="home-design-button">Sifariş et</button>
+                  <span>{product.price}₼</span>
+                  <button
+                    className="home-design-button"
+                    onClick={() => handleOrderClick(product.id)}
+                  >
+                    Sifariş et
+                  </button>
                 </div>
               </div>
             </div>
-          </Link>
-          <Link to="/productcheck">
-            <div className="home-product-card">
-              <div className="image">
-              <img src={black_hoodie2} alt="" className="hover-img" />
-              <img src={white_hoodie2} alt="" />
-              </div>
-              <hr />
-              <div className="home-product-name">Kapşonlu Sviter</div>
-              <div className="home-detail">
-                <div className="home-colors">
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#DEDEDE" }}
-                  ></div>
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#000000" }}
-                  ></div>
-                </div>
-                <div className="home-size">
-                  <span>/</span> <img src={size} alt="" /> S-2XL
-                </div>
-              </div>
-              <div className="home-desc">
-                <div className="home-price">
-                  <span>48₼</span>
-                  <button className="home-design-button">Sifariş et</button>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/productcheck">
-            <div className="home-product-card">
-              <div className="image">
-              <img src={black_hoodie3} alt="" className="hover-img" />
-              <img src={white_hoodie3} alt="" />
-              </div>
-              <hr />
-              <div className="home-product-name">Kapşonlu Sviter</div>
-              <div className="home-detail">
-                <div className="home-colors">
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#DEDEDE" }}
-                  ></div>
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#000000" }}
-                  ></div>
-                </div>
-                <div className="home-size">
-                  <span>/</span> <img src={size} alt="" /> S-2XL
-                </div>
-              </div>
-              <div className="home-desc">
-                <div className="home-price">
-                  <span>48₼</span>
-                  <button className="home-design-button">Sifariş et</button>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/productcheck">
-            <div className="home-product-card">
-              <div className="image">
-                <img src={black_hoodie4} alt="" className="hover-img" />
-                <img src={white_hoodie4} alt="" />
-              </div>
-              <hr />
-              <div className="home-product-name">Kapşonlu Sviter</div>
-              <div className="home-detail">
-                <div className="home-colors">
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#DEDEDE" }}
-                  ></div>
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#000000" }}
-                  ></div>
-                </div>
-                <div className="home-size">
-                  <span>/</span> <img src={size} alt="" /> S-2XL
-                </div>
-              </div>
-              <div className="home-desc">
-                <div className="home-price">
-                  <span>48₼</span>
-                  <button className="home-design-button">Sifariş et</button>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/productcheck">
-          <div className="home-product-card">
-            <div className="image">
-            <img src={black_hoodie5} alt="" className="hover-img" />
-            <img src={white_hoodie5} alt="" />
-            </div>
-            <hr />
-            <div className="home-product-name">Kapşonlu Sviter</div>
-            <div className="home-detail">
-              <div className="home-colors">
-                <div
-                  className="color"
-                  style={{ backgroundColor: "#DEDEDE" }}
-                ></div>
-                <div
-                  className="color"
-                  style={{ backgroundColor: "#000000" }}
-                ></div>
-              </div>
-              <div className="home-size">
-                <span>/</span>
-                <img src={size} alt="" /> S-2XL
-              </div>
-            </div>
-            <div className="home-desc">
-              <div className="home-price">
-                <span>48₼</span>
-                <button className="home-design-button">Sifariş et</button>
-              </div>
-            </div>
-          </div>
-          </Link>
-          <Link to="/productcheck">
-            <div className="home-product-card">
-              <div className="image">
-              <img src={black_hoodie6} alt="" className="hover-img" />
-              <img src={white_hoodie6} alt="" />
-              </div>
-              <hr />
-              <div className="home-product-name">Kapşonlu Sviter</div>
-              <div className="home-detail">
-                <div className="home-colors">
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#DEDEDE" }}
-                  ></div>
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#000000" }}
-                  ></div>
-                </div>
-                <div className="home-size">
-                  <span>/</span> <img src={size} alt="" /> S-2XL
-                </div>
-              </div>
-              <div className="home-desc">
-                <div className="home-price">
-                  <span>48₼</span>
-                  <button className="home-design-button">Sifariş et</button>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/productcheck">
-            <div className="home-product-card">
-              <div className="image">
-                <img src={black_hoodie7} alt="" className="hover-img" />
-                <img src={white_hoodie7} alt="" />
-              </div>
-              <hr />
-              <div className="home-product-name">Kapşonlu Sviter</div>
-              <div className="home-detail">
-                <div className="home-colors">
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#DEDEDE" }}
-                  ></div>
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#000000" }}
-                  ></div>
-                </div>
-                <div className="home-size">
-                  <span>/</span> <img src={size} alt="" /> S-2XL
-                </div>
-              </div>
-              <div className="home-desc">
-                <div className="home-price">
-                  <span>48₼</span>
-                  <button className="home-design-button">Sifariş et</button>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/productcheck">
-            <div className="home-product-card">
-              <div className="image">
-              <img src={black_hoodie8} alt="" className="hover-img" />
-              <img src={white_hoodie8} alt="" />
-              </div>
-              <hr />
-              <div className="home-product-name">Kapşonlu Sviter</div>
-              <div className="home-detail">
-                <div className="home-colors">
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#DEDEDE" }}
-                  ></div>
-                  <div
-                    className="color"
-                    style={{ backgroundColor: "#000000" }}
-                  ></div>
-                </div>
-                <div className="home-size">
-                  <span>/</span> <img src={size} alt="" /> S-2XL
-                </div>
-              </div>
-              <div className="home-desc">
-                <div className="home-price">
-                  <span>48₼</span>
-                  <button className="home-design-button">Sifariş et</button>
-                </div>
-              </div>
-            </div>
-          </Link>
+          ))}
         </div>
       </div>
+
       <div className="home-page-part3">
         <p>Bizə güvənən brendlər</p>
-        <Link 
-  to="/about" 
-  onClick={(e) => {
-    e.preventDefault(); 
-    window.open("https://www.instagram.com/atlaz.wear?igsh=MWU5bnV1ejVjbWVkbw%3D%3D&utm_source=qr", "_blank"); 
-  }}
->
-  <div className="slider-logos">
-    <div className="slide-track">
-         <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
+        <Link
+          to="/about"
+          onClick={(e) => {
+            e.preventDefault();
+            window.open(
+              "https://www.instagram.com/atlaz.wear?igsh=MWU5bnV1ejVjbWVkbw%3D%3D&utm_source=qr",
+              "_blank"
+            );
+          }}
+        >
+          <div className="slider-logos">
+            <div className="slide-track">
+              {[...Array(15)].map((_, index) => (
+                <div className="slide" key={index}>
+                  <img
+                    src={homepagelogo}
+                    alt="Brand logo"
+                    className="slide-img"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img" />
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-          <div className="slide">
-          <img src={homepagelogo} alt="" className="slide-img"/>
-          </div>
-        </div>
-        </div>
         </Link>
       </div>
     </div>

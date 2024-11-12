@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import "./ProductCheck.css";
-// import tshirt_oversize from "./../../site assets/t-shirt oversize/white/ui kart/tshirta.png";
 import { useParams } from "react-router";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -14,15 +13,17 @@ const ProductCheck = () => {
     setQuantity(e.target.value);
   };
 
-  const [data, setdata] = useState();
+  const [data, setData] = useState();
+
   const getOrdering = async (id) => {
     try {
       const response = await axios.get(
         `https://put-print-ky689.ondigitalocean.app/api/products/${id}/`
       );
-      setdata(response.data);
+      console.log("Product Data:", response.data);
+      setData(response.data);
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching product data:", error);
     }
   };
 
@@ -37,10 +38,21 @@ const ProductCheck = () => {
         <hr style={{ border: "1px solid #DEDEDE" }} />
         <div className="check-boxes">
           <div className="product-check-item-image">
-            <img src={data && data.images.main} alt="tshirt" />
+            <img
+              src={
+                data?.images?.main ||
+                data?.front ||
+                data?.black_front ||
+                "default-image.png" 
+              }
+              alt={data?.name || "Product Image"}
+              className={
+                data?.images?.main ? "main-image" : "front-image"
+              }
+            />
           </div>
           <div className="check-boxes-desc">
-            <div className="check-box-title">{data && data.name}</div>
+            <div className="check-box-title">{data?.name}</div>
             <div className="check-boxes-options">
               <div className="check-boxes-option">
                 <label>Rəng</label>
@@ -63,7 +75,7 @@ const ProductCheck = () => {
             <div className="check-box-info">
               <div className="prices-title">Qiyməti</div>
               <div className="product-prices">
-                {data && data.price} ₼ ×
+                {data?.price} ₼ ×
                 <input
                   type="number"
                   value={quantity}
@@ -73,7 +85,7 @@ const ProductCheck = () => {
                   defaultValue="1"
                 />
                 <div className="product-totally-price">
-                  {data && data.price * quantity} ₼
+                  {data?.price * quantity} ₼
                 </div>
               </div>
             </div>
