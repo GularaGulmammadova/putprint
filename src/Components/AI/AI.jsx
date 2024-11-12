@@ -6,44 +6,46 @@ const AI = () => {
   const [prompt, setPrompt] = useState('');
   const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Şəkil yaradılarkən göstərilən vəziyyət
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false); // 1 dəqiqəlik deaktiv vəziyyət
 
   const generateImages = async () => {
+    setIsLoading(true); // Proses başlayarkən "Yaratma Prosesi Davam Edir..." yazısını göstər
+    setIsButtonDisabled(true); // Butonu deaktiv et
+
     try {
-      // Boş şəkillər massivini hazırlayırıq ki, əvvəlki şəkillər təmizlənsin
       setImages([]);
       setError(null);
 
-      const generatedImages = [];
-
-      // API-ə 6 dəfə müraciət edirik
-      for (let i = 0; i < 6; i++) {
-        const response = await axios.post(
-          'https://put-print-ky689.ondigitalocean.app/ai/generate-image/',
-          { prompt },
-          {
-            headers: {
-              'Content-Type': 'application/json'
-            }
+      const response = await axios.post(
+        'https://put-print-ky689.ondigitalocean.app/ai/generate-image/',
+        { prompt },
+        {
+          headers: {
+            'Content-Type': 'application/json'
           }
-        );
-
-        console.log("API cavabı:", response.data);
-
-        // Cavabda image_url varsa, generatedImages massivinə əlavə edirik
-        if (response.data && response.data.image_url) {
-          generatedImages.push(response.data.image_url);
-        } else {
-          setError("API-dən gözlənilməyən cavab alındı.");
-          break;
         }
-      }
+      );
 
-      setImages(generatedImages);
+      console.log("API cavabı:", response.data);
+
+      if (response.data && response.data.image_url) {
+        setImages([response.data.image_url]); // Yalnız bir şəkil əlavə et
+      } else {
+        setError("API-dən gözlənilməyən cavab alındı.");
+      }
 
     } catch (err) {
       console.error("API-dən məlumat alarkən xəta baş verdi:", err);
       setError('API-dən məlumat alarkən xəta baş verdi.');
     }
+
+    setIsLoading(false); // Proses bitəndə "Yaratma Prosesi Davam Edir..." yazısını sil
+
+    // 1 dəqiqə sonra butonu yenidən aktiv et
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 60000); // 60000 ms = 1 dəqiqə
   };
 
   return (
@@ -64,7 +66,14 @@ const AI = () => {
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
       />
-      <button className={styles.btn} onClick={generateImages}>AI ilə yarat</button>
+      <button 
+        className={styles.btn} 
+        onClick={generateImages} 
+        disabled={isButtonDisabled} // Butonun deaktiv vəziyyəti
+        style={{ cursor: isButtonDisabled ? 'not-allowed' : 'pointer' }} // Deaktiv olarkən işarə
+      >
+        {isLoading ? 'Yaratma Prosesi Davam Edir...' : 'AI ilə yarat'}
+      </button>
       
       {error && <p className={styles.error}>{error}</p>}
     </div>
