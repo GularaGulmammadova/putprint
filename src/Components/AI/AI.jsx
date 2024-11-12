@@ -6,12 +6,12 @@ const AI = () => {
   const [prompt, setPrompt] = useState('');
   const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Şəkil yaradılarkən göstərilən vəziyyət
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false); // 1 dəqiqəlik deaktiv vəziyyət
+  const [isLoading, setIsLoading] = useState(false); 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false); 
 
   const generateImages = async () => {
-    setIsLoading(true); // Proses başlayarkən "Yaratma Prosesi Davam Edir..." yazısını göstər
-    setIsButtonDisabled(true); // Butonu deaktiv et
+    setIsLoading(true); 
+    setIsButtonDisabled(true); 
 
     try {
       setImages([]);
@@ -30,7 +30,7 @@ const AI = () => {
       console.log("API cavabı:", response.data);
 
       if (response.data && response.data.image_url) {
-        setImages([response.data.image_url]); // Yalnız bir şəkil əlavə et
+        setImages([response.data.image_url]); 
       } else {
         setError("API-dən gözlənilməyən cavab alındı.");
       }
@@ -40,12 +40,11 @@ const AI = () => {
       setError('API-dən məlumat alarkən xəta baş verdi.');
     }
 
-    setIsLoading(false); // Proses bitəndə "Yaratma Prosesi Davam Edir..." yazısını sil
+    setIsLoading(false); 
 
-    // 1 dəqiqə sonra butonu yenidən aktiv et
     setTimeout(() => {
       setIsButtonDisabled(false);
-    }, 60000); // 60000 ms = 1 dəqiqə
+    }, 60000); 
   };
 
   return (
@@ -69,8 +68,8 @@ const AI = () => {
       <button 
         className={styles.btn} 
         onClick={generateImages} 
-        disabled={isButtonDisabled} // Butonun deaktiv vəziyyəti
-        style={{ cursor: isButtonDisabled ? 'not-allowed' : 'pointer' }} // Deaktiv olarkən işarə
+        disabled={isButtonDisabled}
+        style={{ cursor: isButtonDisabled ? 'not-allowed' : 'pointer' }} 
       >
         {isLoading ? 'Yaratma Prosesi Davam Edir...' : 'AI ilə yarat'}
       </button>
