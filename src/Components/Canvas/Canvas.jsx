@@ -346,17 +346,17 @@ const Canvas = ({ product,id }) => {
 
   const submitDesign = () => {
     setShowTransformer(false);
-    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+    //showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
     console.log([frontContent.screenshot, backContent.screenshot]); 
     return [frontContent.screenshot, backContent.screenshot];
   }
 
   const downloadDesign = () => {
-    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+    //showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
     
     const base64Images = submitDesign()
     base64Images && base64Images.length>0 && base64Images.forEach((base64String, index) => {
-      if (base64String!==null && base64String!==undefined && base64String && typeof base64String === 'string'){
+      if (base64String!==null && base64String!==undefined && base64String && typeof base64String === 'string' && base64String!=='null'){
         const link = document.createElement('a');
         link.href = base64String; 
         link.download = `image_${index + 1}.png`;
