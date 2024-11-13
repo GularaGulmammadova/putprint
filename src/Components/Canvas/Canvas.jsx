@@ -181,15 +181,15 @@ const Canvas = ({ product,id }) => {
   //   createPDF(frontContent.screenshot, backContent.screenshot);
   // };
 
-  const captureScreenshot = () => {
-    const stage = stageRef.current;
-    if (!stage) return;
+  // const captureScreenshot = () => {
+  //   const stage = stageRef.current;
+  //   if (!stage) return;
 
-    const dataURL = stage.toDataURL(); 
+  //   const dataURL = stage.toDataURL(); 
     
-    console.log('Base64 Image:', dataURL);
-    return dataURL;
-  };
+  //   console.log('Base64 Image:', dataURL);
+  //   return dataURL;
+  // };
 
 
   const handleLabelTransform = (e) => {
@@ -341,34 +341,34 @@ const Canvas = ({ product,id }) => {
   const currentImage = showFront ? frontContent.image : backContent.image;
   const currentLabel = showFront ? frontContent.label : backContent.label;
 
-  const submitDesign = () => {
-    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
-    console.log([frontContent.screenshot, backContent.screenshot]); 
-    return [frontContent.screenshot, backContent.screenshot];
-  }
+  // const submitDesign = () => {
+  //   showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+  //   console.log([frontContent.screenshot, backContent.screenshot]); 
+  //   return [frontContent.screenshot, backContent.screenshot];
+  // }
 
-  const downloadDesign = () => {
-    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+  // const downloadDesign = () => {
+  //   showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
 
-    const base64Images = submitDesign()
-    base64Images && base64Images.length>0 && base64Images.forEach((base64String, index) => {
-      if (base64String!==null && base64String!==undefined && base64String && typeof base64String === 'string'){
-        const link = document.createElement('a');
-        link.href = base64String; 
-        link.download = `image_${index + 1}.png`;
+  //   const base64Images = submitDesign()
+  //   base64Images && base64Images.length>0 && base64Images.forEach((base64String, index) => {
+  //     if (base64String!==null && base64String!==undefined && base64String && typeof base64String === 'string'){
+  //       const link = document.createElement('a');
+  //       link.href = base64String; 
+  //       link.download = `image_${index + 1}.png`;
 
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-    });
-  };
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       document.body.removeChild(link);
+  //     }
+  //   });
+  // };
 
 
-  useEffect(() => {
-    showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
+  // useEffect(() => {
+  //   showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
     
-  }, [frontContent, backContent])
+  // }, [frontContent, backContent])
 
   return (
     <div className={styles.flex}>
@@ -577,7 +577,7 @@ const Canvas = ({ product,id }) => {
                     setShowFront(true);
                     setShowTransformer(false);
                     setShowTransformerL(false);
-                    setBackContent({...backContent, screenshot: captureScreenshot()});
+                    // setBackContent({...backContent, screenshot: captureScreenshot()});
                   }}
                 />
 
@@ -594,6 +594,7 @@ const Canvas = ({ product,id }) => {
                       setShowFront(false);
                       setShowTransformer(false);
                       setShowTransformerL(false);
+                      // eslint-disable-next-line no-undef
                       setFrontContent({...frontContent, screenshot: captureScreenshot()});
                     }}
                   />
@@ -614,8 +615,9 @@ const Canvas = ({ product,id }) => {
         image={
           showFront ? frontContent.image.value.src : backContent.image.value.src
         }
-        submitDesign={submitDesign}
-        downloadDesign={downloadDesign}
+        
+        // submitDesign={submitDesign}
+        // downloadDesign={downloadDesign}
       />
     </div>
   );
