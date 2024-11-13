@@ -11,6 +11,10 @@
     background-color: #ff800b;
     color: white;
     border-color: #ff800b;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -54,6 +58,8 @@
     width: 100%;
     display: flex;
     gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .btns .btn {
@@ -76,6 +82,9 @@
     color: white;
     background-color: #ff800b;
     border: 1px solid #ff800b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .heading {
@@ -109,6 +118,7 @@
     font-size: 1.2rem;
     width: 100%;
     margin: 30px 0 20px 0;
+    cursor: pointer;
 }
 
 .imgAndTitle {

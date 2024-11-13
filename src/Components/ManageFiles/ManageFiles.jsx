@@ -38,16 +38,16 @@ const ManageFiles = ({setColor, product, submitDesign, downloadDesign}) => {
         </div></>}
 
         <div className={styles.spaceBetween}>
-          <h3 className={styles.title}>Ümümi Qiymət</h3>
+          <h3 className={styles.title}>Ümumi Qiymət</h3>
           {!product.minPrice && <h3 className={styles.title}>{product.price}</h3>}
           {product.minPrice && <h3 className={styles.title}>{material==='Nazik' ? product.minPrice : product.maxPrice}</h3> }
         </div> 
-        <button onClick={() => {downloadDesign();}} className={styles.orderBtn}>Dizainı yüklə</button>
+        <button onClick={() => {downloadDesign();}} className={styles.orderBtn}>Dizaynı yüklə</button>
         <button onClick={submitDesign} className={styles.orderBtn}>Sifariş et</button>
       </div>
 
       <div className={styles.warning}>
-        <h3>{`! Don't go out of the borders`}</h3>
+        <h3>{`Çərçivədən kənarda qalan dizaynlar çap olunmayacaq!`}</h3>
       </div>
     </div>
   )
