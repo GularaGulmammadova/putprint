@@ -23,11 +23,12 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
         fileInputRef.current.value = null; 
     }
 
-    const createOrderAndOrderItem = async () => {
+    const createOrderAndOrderItem = async (shippingAddress) => {
         try {
-            const orderResponse = await axios.post("https://put-print-ky689.ondigitalocean.app/api/orders", {});
+            const orderResponse = await axios.post("https://put-print-ky689.ondigitalocean.app/api/orders/", {
+                shipping_address: shippingAddress || 'Baku, Azerbaijan',  
+            });
             const orderId = orderResponse.data.id;
-    
             const orderItemResponse = await axios.post(`https://put-print-ky689.ondigitalocean.app/api/orders/${orderId}/orderitems`, {});
             return orderItemResponse.data.id;
         } catch (error) {
@@ -40,13 +41,14 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
             return null;
         }
     };
+    
 
-    const handleSubmitImage = async (file, customizationData) => {
+    const handleSubmitImage = async (file, customizationData, shippingAddress) => {
         const formData = new FormData();
         formData.append('image', file);
         formData.append('asset_type', 'image');
-    
-        const orderItemId = await createOrderAndOrderItem();
+        
+        const orderItemId = await createOrderAndOrderItem(shippingAddress);  
         if (!orderItemId) return;
     
         formData.append('order_item', orderItemId);
@@ -71,9 +73,11 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
             }
         }
     };
+    
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
+        const shippingAddress = 'Baku, Azerbaijan';     
         if (file) {
             handleImageChange(e); 
             const customizationData = {
@@ -82,9 +86,10 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                 fontSize: content.label.fontSize,
                 rotation: content.label.rotation,
             };
-            handleSubmitImage(file, customizationData); 
+            handleSubmitImage(file, customizationData, shippingAddress);  
         }
     };
+    
 
     return (
         <div className={styles.column}>
