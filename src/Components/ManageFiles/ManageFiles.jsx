@@ -2,15 +2,20 @@
 import styles from './ManageFiles.module.css'
 import ColorPicker from '../ColorPicker/ColorPicker'
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const ManageFiles = ({setColor, product, submitDesign, downloadDesign}) => {
+const ManageFiles = ({setColor, product, downloadDesign, id}) => {
 
   const [size, setSize] = useState('S');
   const [material, setMaterial] = useState('Nazik');
+  const navigate = useNavigate();
 
   const sizes = ['S', 'M', 'L', 'XL', '2XL'];
   const materials = ['Nazik', 'Qalın'];
+  const handleOrderClick = () => {
+    navigate(`/productcheck/${id}`);
+  };
+
 
   return (
     <div className={styles.file}>
@@ -43,7 +48,7 @@ const ManageFiles = ({setColor, product, submitDesign, downloadDesign}) => {
           {product.minPrice && <h3 className={styles.title}>{material==='Nazik' ? product.minPrice : product.maxPrice}</h3> }
         </div> 
         <button onClick={() => {downloadDesign();}} className={styles.orderBtn}>Dizaynı yüklə</button>
-        <button onClick={submitDesign} className={styles.orderBtn}>Sifariş et</button>
+        <button onClick={handleOrderClick} className={styles.orderBtn}>Sifariş et</button>
       </div>
 
       <div className={styles.warning}>

@@ -82,7 +82,6 @@ const ProductCheck = () => {
                   onChange={handleQuantityChange}
                   className="check-quantity-input"
                   min="1"
-                  defaultValue="1"
                 />
                 <div className="product-totally-price">
                   {data?.price * quantity} ₼

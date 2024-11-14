@@ -8,13 +8,14 @@ import styles from './LeftTools.module.css';
 import FontFamilyDropDown from '../FontFamilyDropDown/FontFamilyDropDown';
 import AI from '../AI/AI';
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-
+import { v4 as uuidv4 } from 'uuid';  
 
 const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowTransformer }) => {
-
     const [chosen, setChosen] = useState('Yüklə');
     const fileInputRef = useRef(null);
+    
+    
+    const orderItemId = uuidv4();  
 
     const handleFileButtonClick = () => {
         fileInputRef.current.click(); 
@@ -23,15 +24,16 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
     const deleteImgAndFile = () => {
         deleteImg();
         fileInputRef.current.value = null; 
-    }
+    };
 
     const handleSubmitImage = async (file) => {
         const formData = new FormData();
-        formData.append('image', file); 
+        formData.append('image', file);
         formData.append('asset_type', 'image');
-        formData.append('order_item', uuidv4());    
+        formData.append('order_item', orderItemId); 
+        
         try {
-            const response = await axios.post('https://put-print-ky689.ondigitalocean.app/api/customizations/', formData, {
+            const response = await axios.post(`https://put-print-ky689.ondigitalocean.app/api/orderitems/${orderItemId}/customization`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -44,7 +46,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
             }
         }
     };
-    
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -79,7 +81,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                                                 disabled 
                                                 value={Math.round(content.image.width, 1)} 
                                                 onChange={(e) => { 
-                                                    setShowTransformer(false);  // Transformasiya panelini gizlətmək
+                                                    setShowTransformer(false); 
                                                     setContent({
                                                         ...content, 
                                                         image: { 
@@ -99,7 +101,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                                                 disabled 
                                                 value={Math.round(content.image.height, 1)} 
                                                 onChange={(e) => { 
-                                                    setShowTransformer(false);  // Transformasiya panelini gizlətmək
+                                                    setShowTransformer(false);  
                                                     setContent({
                                                         ...content, 
                                                         image: { 
@@ -119,7 +121,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                                                 disabled 
                                                 defaultValue={Math.round(content.image.rotation, 1)} 
                                                 onChange={(e) => { 
-                                                    setShowTransformer(false);  // Transformasiya panelini gizlətmək
+                                                    setShowTransformer(false); 
                                                     setContent({
                                                         ...content, 
                                                         image: { 
@@ -231,12 +233,17 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                     })} className={styles.btn}>Mətni əlavə et</button>
                 </div>
 
-                {chosen === 'AI' && <AI />}
-
+                {chosen === 'AI' && (
+                    <div className={styles.choiceAI}>
+                        <AI setContent={setContent} content={content} />
+                    </div>
+                )}
             </div>
         </div>
-    )
-}
+    );
+};
+
+
 
 
 export default LeftTools;
