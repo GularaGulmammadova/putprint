@@ -22,8 +22,14 @@ const ProductDetail = () => {
           `https://put-print-ky689.ondigitalocean.app/api/products/${id}/`
         );
         const productData = response.data;
+
         setProduct(productData);
-        setMainImage(productData.images.main || "");
+        const mainImage =
+          productData.images && productData.images.main
+            ? productData.images.main
+            : "";
+        setMainImage(mainImage);
+
         setSelectedColor(
           productData.colors && productData.colors.length > 0
             ? productData.colors[0].color
@@ -45,9 +51,18 @@ const ProductDetail = () => {
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
-    if (product) {
-      const colorProduct = product.colors.find((c) => c.color === color);
-      setMainImage(colorProduct ? colorProduct.image : product.images.main);
+    if (product && product.colors) {
+      const selectedProductColor = product.colors.find(
+        (c) => c.color === color
+      );
+
+      // Seçilmiş rəngin şəkili varsa, onu göstəririk
+      if (selectedProductColor && selectedProductColor.image) {
+        setMainImage(selectedProductColor.image);
+      } else {
+        // Əgər rəng üçün şəkil yoxdursa, əsas şəkili göstəririk
+        setMainImage(product.images.main);
+      }
     }
   };
 
@@ -97,16 +112,25 @@ const ProductDetail = () => {
     );
   }
 
-  const images = product.images?.hover
-    ? [product.images.main, product.images.hover]
-    : [product.images.main];
+  const images =
+    product?.id >= 1 && product?.id <= 6
+      ? product.images?.hover
+        ? [product.images?.main, product.images?.hover]
+        : [product.images?.main]
+      : product?.id >= 7 && product?.id <= 14
+      ? [product.images?.front, product.images?.black_front]
+      : [];
 
   return (
     <div className="container">
       <div className="product-container">
         <div className="product-detail">
           <div className="product-image">
-            <img src={mainImage} alt={product.name} className="main-image" />
+            <img
+              src={mainImage}
+              alt={product?.name || "Product Image"}
+              className="main-image"
+            />
             <div className="thumbnail-images">
               {images.map((image, index) => (
                 <img
@@ -176,10 +200,20 @@ const ProductDetail = () => {
               </div>
             )}
             <div className="product-price">
-              <span>{product.price}</span>
-              <Link to={`/designer/${id}`}>
-                <button className="start-design-button">Dizayna başla</button>
-              </Link>
+              <span>{product.price_display}</span>
+              {product.id >= 7 && product.id <= 14 ? (
+                <Link to={`/productcheck/${product.id}`}>
+                  <button className="order-button">Sifariş et</button>
+                </Link>
+              ) : product.id >= 1 && product.id <= 6 ? (
+                <Link to={`/designer/${id}`}>
+                  <button className="start-design-button">Dizayna başla</button>
+                </Link>
+              ) : (
+                <button className="start-design-button" disabled>
+                  Dizayna başla
+                </button>
+              )}
             </div>
           </div>
         </div>

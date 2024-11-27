@@ -1,7 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import "./Contact.css";
 import contactimage from "./../../site assets/contactimage.png";
+import { Bounce, toast, ToastContainer } from 'react-toastify';
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -11,7 +13,7 @@ function Contact() {
         phone: '',
         message: '',
         username: 'defaultName',
-        password: 'defaultPassword123'  
+        password: 'defaultPassword123'
     });
 
     const handleChange = (e) => {
@@ -22,14 +24,41 @@ function Contact() {
         });
     };
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    // Updated phone validation for Azerbaijani phone numbers (without +994 and allowing various prefixes)
+    const validatePhone = (phone) => {
+        const phoneRegex = /^(050|051|055|070|077)[0-9]{7}$/;
+        return phoneRegex.test(phone);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
+        if (!validateEmail(formData.email)) {
+            toast.error("Zəhmət olmasa düzgün e-mail daxil edin. '@' simvolu daxil edilməlidir.", {
+                position: "top-right",
+                autoClose: 5000,
+            });
+            return;
+        }
+
+        if (!validatePhone(formData.phone)) {
+            toast.error("Telefon nömrəsi düzgün formatda olmalıdır: 0501234567", {
+                position: "top-right",
+                autoClose: 5000,
+            });
+            return;
+        }
+
         const uniqueUsername = `defaultName_${Math.floor(Math.random() * 900000) + 100000}`;
         const formDataWithUniqueUsername = { ...formData, username: uniqueUsername };
-    
+
         console.log('Form data:', formDataWithUniqueUsername);
-    
+
         try {
             const response = await fetch('https://put-print-ky689.ondigitalocean.app/api/users/', {
                 method: 'POST',
@@ -38,10 +67,22 @@ function Contact() {
                 },
                 body: JSON.stringify(formDataWithUniqueUsername)
             });
-    
+
             if (response.ok) {
                 console.log('Form məlumatları uğurla göndərildi:', formDataWithUniqueUsername);
-                alert('Məlumatlar uğurla göndərildi');
+                toast.success('Məlumatınız uğurla göndərildi!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+
+                // Clear form data after successful submission
                 setFormData({
                     first_name: '',
                     last_name: '',
@@ -54,25 +95,25 @@ function Contact() {
             } else {
                 const errorData = await response.json();
                 console.error('Server xətası:', errorData);
-    
-                if (errorData.username && errorData.username.includes('User with this username already exists.')) {
-                    alert('Bu istifadəçi adı artıq mövcuddur. Yenidən cəhd edin.');
-                } else {
-                    alert('Məlumatlar göndərilərkən xəta baş verdi: ' + errorData.message || 'Naməlum xəta');
-                }
+                toast.error('Məlumatlar göndərilərkən xəta baş verdi: ' + (errorData.message || 'Naməlum xəta'), {
+                    position: "top-right",
+                    autoClose: 5000,
+                });
             }
         } catch (error) {
             console.error('Xəta:', error);
-            alert('Xəta baş verdi. Zəhmət olmasa, yenidən cəhd edin.');
+            toast.error('Xəta baş verdi. Zəhmət olmasa, yenidən cəhd edin.', {
+                position: "top-right",
+                autoClose: 5000,
+            });
         }
     };
-        
 
     return (
         <>
             <div className='ContactPageBox'>
                 <img src={contactimage} className='fullscreen-image' alt="Contact" />
-                <p> Sualların və məsləhətlərin üçün Put&Print komandası ilə əlaqə saxla.</p>
+                <p>Sualların və məsləhətlərin üçün Put&Print komandası ilə əlaqə saxla.</p>
                 <div className='contact-form'>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -114,7 +155,7 @@ function Contact() {
                         <div className="form-group">
                             <label htmlFor="contact_number">Telefon Nömrəsi:</label>
                             <input
-                                type="phone"
+                                type="tel"
                                 id="phone"
                                 name="phone"
                                 value={formData.phone}
@@ -138,6 +179,7 @@ function Contact() {
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </>
     );
 }

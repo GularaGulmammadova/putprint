@@ -5,14 +5,13 @@ import "./Products.css";
 import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import needle from './../../site assets/logo and icons/needle.png'
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://put-print-ky689.ondigitalocean.app/api/products/?ordering=id");
@@ -22,7 +21,8 @@ const Products = () => {
       }
     };
     setTimeout(() => setLoading(false), 1500);
-    fetchProducts();
+    fetchProducts();    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   if (loading) {
@@ -83,16 +83,29 @@ const Products = () => {
                   </div>
                   {product.material && (
                     <div className="material">
+                      <img src={needle} alt="" />
                       <span>{product.material}</span>
                     </div>
                   )}
+                {/* {product.threads && (
+                <div className="threads-variants">
+                <p>Material</p>
+                <div className="threads">
+                  {product.threads.split(",").map((threads) => (
+                    <button
+                      key={threads}
+                      className="threads-box"
+                    >
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )} */}
                 </div>
                 <div className="desc">
                   <div className="price">
-                    <span>{product.price}₼</span>
-                    <Link to="/products">
+                    <span>{product.price_display}</span>
                       <button className="design-button">Dizayn et</button>
-                    </Link>
                   </div>
                 </div>
               </div>

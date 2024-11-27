@@ -43,24 +43,29 @@ const HomePage = () => {
           <img src={homepageclothing} alt="homepage clothing" />
         </div>
       </div>
+
       <div className="home-page-part2">
         <p>AtlazWear – dan kolleksiyalar</p>
         <div className="home-product-cards">
           {products.map((product) => (
             <div key={product.id} className="home-product-card">
-              <Link to={`/productcheck/${product.id}`}>
+              {/* <Link to={`/productdetail/${product.id}`}> */}
                 <div className="image">
                   <img
-                    src={product.black_front || "default-image-url.jpg"}
-                    alt="Product Image"
+                    src={
+                      product.black_front ||
+                      product.front ||
+                      "default-image-url.jpg"
+                    }
+                    alt="Product Black Front"
                     className="hover-img"
                   />
                   <img
                     src={product.front || "default-image-url.jpg"}
-                    alt="Product Image"
+                    alt="Product Front"
                   />
                 </div>
-              </Link>
+              {/* </Link> */}
               <hr />
               <div className="home-product-name">{product.name}</div>
               <div className="home-detail">
@@ -77,7 +82,7 @@ const HomePage = () => {
                   </div>
                 )}
                 <div className="size">
-                  <span>{product.sizeRange}</span>
+                  <span>{product.sizeRange || "Ölçü mövcud deyil"}</span>
                 </div>
                 {product.material && (
                   <div className="material">
@@ -87,13 +92,15 @@ const HomePage = () => {
               </div>
               <div className="home-desc">
                 <div className="home-price">
-                  <span>{product.price}₼</span>
-                  <button
-                    className="home-design-button"
-                    onClick={() => handleOrderClick(product.id)}
-                  >
-                    Sifariş et
-                  </button>
+                  <span>{product.price_display}</span>
+                  <Link to={`/productcheck/${product.id}`}>
+                    <button
+                      className="home-design-button"
+                      onClick={() => handleOrderClick(product.id)}
+                    >
+                      Sifariş et
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

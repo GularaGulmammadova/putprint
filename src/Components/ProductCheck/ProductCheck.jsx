@@ -8,19 +8,22 @@ import { Link } from "react-router-dom";
 const ProductCheck = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
+  const [selectedColor, setSelectedColor] = useState("white"); 
+  const [data, setData] = useState();
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
-  const [data, setData] = useState();
+  const handleColorChange = (e) => {
+    setSelectedColor(e.target.value);
+  };
 
   const getOrdering = async (id) => {
     try {
       const response = await axios.get(
         `https://put-print-ky689.ondigitalocean.app/api/products/${id}/`
       );
-      console.log("Product Data:", response.data);
       setData(response.data);
     } catch (error) {
       console.log("Error fetching product data:", error);
@@ -31,6 +34,56 @@ const ProductCheck = () => {
     getOrdering(id);
   }, [id]);
 
+  if (!data) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <div
+          style={{
+            width: "50px",
+            height: "50px",
+            border: "4px solid rgba(255, 255, 255, 0.3)",
+            borderBottom: "4px solid #ae4559",
+            borderTop: "4px solid #f15620",
+            borderRadius: "50%",
+            animation: "spin 1s linear infinite",
+          }}
+        ></div>
+        <style>
+          {`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}
+        </style>
+      </div>
+    );
+  }
+
+  
+  const renderImage = () => {
+    if (data.id >= 7 && data.id <= 14) {
+      return selectedColor === "black" ? data.black_front : data.front;
+    } else if (data.id >= 1 && data.id <= 6) {
+      if (selectedColor === "black" && data.id !== 6) {
+        return data.black_front || "default-black.png";
+      }
+      return data.front || "default-white.png";
+    } else {
+      return "default-image.png";
+    }
+  };
+
+  
+  const showColorOptions = data.id >= 1 && data.id <= 14;
+
   return (
     <div className="container" style={{ width: "100%", maxWidth: "800px" }}>
       <div className="product-check-box">
@@ -39,28 +92,30 @@ const ProductCheck = () => {
         <div className="check-boxes">
           <div className="product-check-item-image">
             <img
-              src={
-                data?.images?.main ||
-                data?.front ||
-                data?.black_front ||
-                "default-image.png" 
-              }
+            style={{height: "auto", objectFit: "cover"}}
+              src={renderImage()}
               alt={data?.name || "Product Image"}
-              className={
-                data?.images?.main ? "main-image" : "front-image"
-              }
+              className="product-image"
             />
           </div>
           <div className="check-boxes-desc">
             <div className="check-box-title">{data?.name}</div>
             <div className="check-boxes-options">
-              <div className="check-boxes-option">
-                <label>Rəng</label>
-                <select>
-                  <option>Ağ</option>
-                  <option>Qara</option>
-                </select>
-              </div>
+              {showColorOptions && (
+                <div className="check-boxes-option">
+                  <label>Rəng</label>
+                  <select
+                    value={selectedColor}
+                    onChange={handleColorChange}
+                    disabled={data.id === 6} 
+                  >
+                    <option value="white">Ağ</option>
+                    {data.id !== 6 && (
+                      <option value="black">Qara</option>
+                    )}
+                  </select>
+                </div>
+              )}
               <div className="check-boxes-option">
                 <label>Ölçü</label>
                 <select>
@@ -75,7 +130,7 @@ const ProductCheck = () => {
             <div className="check-box-info">
               <div className="prices-title">Qiyməti</div>
               <div className="product-prices">
-                {data?.price} ₼ ×
+                {data?.price_display} ×
                 <input
                   type="number"
                   value={quantity}
