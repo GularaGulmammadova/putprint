@@ -148,7 +148,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                             ...content,
                             image: {
                               ...content.image,
-                              rotation: e.target.value,
+                              rotation: Number(e.target.value),
                             },
                           });
                         }}
@@ -213,7 +213,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                 ...content,
                 label: {
                   ...content.label,
-                  fontSize: e.target.value,
+                  fontSize: Number(e.target.value),
                 },
               })
             }
@@ -234,7 +234,7 @@ const LeftTools = ({ setContent, content, deleteImg, handleImageChange, setShowT
                 ...content,
                 label: {
                   ...content.label,
-                  rotation: e.target.value,
+                  rotation: Number(e.target.value),
                 },
               })
             }

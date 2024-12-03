@@ -5,60 +5,93 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 
-const ManageFiles = ({ setColor, product, downloadDesign, id }) => {
+const ManageFiles = ({ frontContent, backContent, setColor, product, downloadDesign, id }) => {
   const [size, setSize] = useState('S');
   const [material, setMaterial] = useState('Nazik');
-  // const [frontImage, setFrontImage] = useState(null); // Front dizayn şəkli
-  // const [backImage, setBackImage] = useState(null);  // Back dizayn şəkli
   const navigate = useNavigate();
   const sizes = ['S', 'M', 'L', 'XL', '2XL'];
   const materials = ['Nazik', 'Qalın'];
 
-  // Sifariş funksiyası
+  function base64ToFile(base64, filename) {
+    const arr = base64.split(','); 
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    const n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    for (let i = 0; i < n; i++) {
+        u8arr[i] = bstr.charCodeAt(i);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  }
+
+
   const handleOrderClick = async () => {
     const formData = new FormData();
-    
-    // if (frontImage) {
-    //   formData.append('front_image', frontImage);
-    // }
 
-    // if (backImage) {
-    //   formData.append('back_image', backImage); 
-    // }
-
+    const frontImageFile = frontContent.image.value && frontContent.image.value.src ? base64ToFile(frontContent.image.value.src, 'frontImage.png') : base64ToFile(frontContent.screenshot, 'frontMockup.png');
+    const backImageFile = backContent.image.value && backContent.image.value.src ? base64ToFile(backContent.image.value.src, 'backImage.png') : base64ToFile(backContent.screenshot, 'backMockup.png');
+    const frontMockupFile = base64ToFile(frontContent.screenshot, 'frontMockup.png');
+    const backMockupFile = backContent.screenshot ? base64ToFile(backContent.screenshot, 'backMockup.png') : base64ToFile(frontContent.screenshot, 'frontMockup.png');
+  
+    if (frontImageFile) {
+      formData.append('front_image', frontImageFile);
+    }
+    if (backImageFile) {
+      formData.append('back_image', backImageFile);
+    }
+    if (frontMockupFile) {
+      formData.append('front_mockup', frontMockupFile);
+    }
+    if (backMockupFile) {
+      formData.append('back_mockup', backMockupFile);
+    }
+  
     const orderData = {
-      shipping_address: "Bakı", 
-      status: "PENDING", 
-      products: [{
-        product: id,
-        color: setColor,  
-        size: size,       
-        material: material 
-      }],
+      color: frontContent.tshirtColor.toUpperCase(),
+      material: material.toUpperCase(),
+      size: size.toUpperCase(),
+      quantity: 1,
+      text: `front: ${frontContent.label.title}, back: ${backContent.label.title}`,
+      text_color: frontContent.label.color,
+      text_font: frontContent.label.fontFamily,
+      status: "PENDING",
+      product: id
     };
-
-    
-    formData.append('order_data', JSON.stringify(orderData));
-
+  
+    formData.append('color', orderData.color);
+    formData.append('material', orderData.material);
+    formData.append('size', orderData.size);
+    formData.append('quantity', orderData.quantity);
+    formData.append('text', orderData.text);
+    formData.append('text_color', orderData.text_color);
+    formData.append('text_font', orderData.text_font);
+    formData.append('status', orderData.status);
+    formData.append('product', String(orderData.product));
+  
     try {
-    
       const response = await axios.post(
         'https://put-print-ky689.ondigitalocean.app/api/orders/',
         formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
+            'accept': 'application/json',
+            'X-CSRFTOKEN': 'OuuJ0uoTkezagK8ahozdtcGZXSw2LWIdVqaSD3Rz3qSgIzZ7UeCkecAAMSSojM1G', // Use your actual CSRF token
           },
         }
       );
-
+  
       console.log("Sifariş uğurla yaradıldı:", response.data);
-      navigate(`/productcheck/${response.data.id}`);
+      if (response.data.id) navigate(`/productcheck/${response.data.id}`);
     } catch (error) {
       console.error("Sifariş yaradılarkən xəta baş verdi:", error.response?.data || error.message);
       alert("Sifariş yaradılarkən xəta baş verdi.");
     }
   };
+  
+  
 
   return (
     <div className={styles.file}>

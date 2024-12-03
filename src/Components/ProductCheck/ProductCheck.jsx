@@ -10,6 +10,7 @@ const ProductCheck = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState("white"); 
   const [data, setData] = useState();
+  const [product, setProduct] = useState();
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
@@ -22,9 +23,20 @@ const ProductCheck = () => {
   const getOrdering = async (id) => {
     try {
       const response = await axios.get(
-        `https://put-print-ky689.ondigitalocean.app/api/products/${id}/`
+        `https://put-print-ky689.ondigitalocean.app/api/orders/${id}/`
       );
       setData(response.data);
+    } catch (error) {
+      console.log("Error fetching product data:", error);
+    }
+  };
+
+  const getProduct = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://put-print-ky689.ondigitalocean.app/api/products/${id}/`
+      );
+      setProduct(response.data);
     } catch (error) {
       console.log("Error fetching product data:", error);
     }
@@ -33,6 +45,10 @@ const ProductCheck = () => {
   useEffect(() => {
     getOrdering(id);
   }, [id]);
+
+  useEffect(() => {
+    data && data.product && getProduct(data.product);
+  }, [data]);
 
   if (!data) {
     return (
@@ -84,6 +100,8 @@ const ProductCheck = () => {
   
   const showColorOptions = data.id >= 1 && data.id <= 14;
 
+  const sizes = ['S', 'M', 'L', 'XL', '2XL']
+
   return (
     <div className="container" style={{ width: "100%", maxWidth: "800px" }}>
       <div className="product-check-box">
@@ -93,7 +111,8 @@ const ProductCheck = () => {
           <div className="product-check-item-image">
             <img
             style={{height: "auto", objectFit: "cover"}}
-              src={renderImage()}
+              // src={renderImage()}
+              src={data.front_mockup}
               alt={data?.name || "Product Image"}
               className="product-image"
             />
@@ -119,18 +138,14 @@ const ProductCheck = () => {
               <div className="check-boxes-option">
                 <label>Ölçü</label>
                 <select>
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                  <option>2XL</option>
+                  {sizes.map((s,i) => s===data.size ? <option selected="selected" key={i}>{s}</option> : <option key={i}>{s}</option>)}
                 </select>
               </div>
             </div>
             <div className="check-box-info">
               <div className="prices-title">Qiyməti</div>
               <div className="product-prices">
-                {data?.price_display} ×
+                {data.material==='NAZIK' ? product?.price_thin : product?.price_thick} ×
                 <input
                   type="number"
                   value={quantity}
@@ -139,12 +154,12 @@ const ProductCheck = () => {
                   min="1"
                 />
                 <div className="product-totally-price">
-                  {data?.price * quantity} ₼
+                  {(data.material==='NAZIK' ? product?.price_thin : product?.price_thick)* quantity} ₼
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div> 
         <Link
           to=""
           onClick={(e) => {

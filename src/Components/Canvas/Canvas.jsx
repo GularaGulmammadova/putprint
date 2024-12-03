@@ -133,56 +133,6 @@ const Canvas = ({ product,id }) => {
     node.getLayer().batchDraw();
   };
 
-  
-  
-
-
-
-
-
-  // const createPDF = (frontBase64, backBase64) => {
-  //   const canvas = document.createElement('canvas');
-  //   const context = canvas.getContext('2d');
-    
-  //   const width = 595; 
-  //   const height = 842; 
-  //   canvas.width = width;
-  //   canvas.height = height;
-
-  //   const frontImage = new Image();
-  //   frontImage.src = frontBase64;
-  //   frontImage.onload = () => {
-  //     context.drawImage(frontImage, 0, 0, width, height);
-
-  //     const backCanvas = document.createElement('canvas');
-  //     backCanvas.width = width;
-  //     backCanvas.height = height;
-  //     const backContext = backCanvas.getContext('2d');
-
-  //     const backImage = new Image();
-  //     backImage.src = backBase64;
-  //     backImage.onload = () => {
-  //       backContext.drawImage(backImage, 0, 0, width, height);
-        
-  //       const pdfBlob = new Blob([
-  //         canvas.toDataURL('image/png'),
-  //         backCanvas.toDataURL('image/png')
-  //       ], { type: 'application/pdf' });
-
-  //       const link = document.createElement('a');
-  //       link.href = URL.createObjectURL(pdfBlob);
-  //       link.download = 'screenshot.pdf';
-  //       document.body.appendChild(link);
-  //       link.click();
-  //       document.body.removeChild(link);
-  //     };
-  //   };
-  // };
-
-  // const handleDownload = () => {
-  //   createPDF(frontContent.screenshot, backContent.screenshot);
-  // };
-
   const captureScreenshot = () => {
     const stage = stageRef.current;
     if (!stage) return;
@@ -326,7 +276,6 @@ const Canvas = ({ product,id }) => {
         },
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageSrc, showFront]);
 
   useEffect(() => {
@@ -338,22 +287,17 @@ const Canvas = ({ product,id }) => {
         image: { ...backContent.image, value: img },
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageSrcBack, showFront]);
 
   const currentImage = showFront ? frontContent.image : backContent.image;
   const currentLabel = showFront ? frontContent.label : backContent.label;
 
   const submitDesign = () => {
-    setShowTransformer(false);
-    //showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
-    console.log([frontContent.screenshot, backContent.screenshot]); 
+    setShowTransformer(false);console.log([frontContent.screenshot, backContent.screenshot]); 
     return [frontContent.screenshot, backContent.screenshot];
   }
 
   const downloadDesign = () => {
-    //showFront ? setFrontContent({...frontContent, screenshot: captureScreenshot()}) : setBackContent({...backContent, screenshot: captureScreenshot()});
-    
     const base64Images = submitDesign()
     base64Images && base64Images.length>0 && base64Images.forEach((base64String, index) => {
       if (base64String!==null && base64String!==undefined && base64String && typeof base64String === 'string' && base64String!=='null'){
@@ -611,6 +555,8 @@ const Canvas = ({ product,id }) => {
         id={id}
         product={product}
         // handleDownload={handleDownload}
+        backContent={backContent}
+        frontContent={frontContent}
         setColor={(c) => {
           setFrontContent({ ...frontContent, tshirtColor: c });
           setBackContent({ ...backContent, tshirtColor: c });
