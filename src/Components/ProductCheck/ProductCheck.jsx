@@ -84,20 +84,6 @@ const ProductCheck = () => {
   }
 
   
-  const renderImage = () => {
-    if (data.id >= 7 && data.id <= 14) {
-      return selectedColor === "black" ? data.black_front : data.front;
-    } else if (data.id >= 1 && data.id <= 6) {
-      if (selectedColor === "black" && data.id !== 6) {
-        return data.black_front || "default-black.png";
-      }
-      return data.front || "default-white.png";
-    } else {
-      return "default-image.png";
-    }
-  };
-
-  
   const showColorOptions = data.id >= 1 && data.id <= 14;
 
   const sizes = ['S', 'M', 'L', 'XL', '2XL']
