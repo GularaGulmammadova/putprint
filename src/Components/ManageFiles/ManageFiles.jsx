@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const ManageFiles = ({ frontContent, backContent, setColor, product, downloadDesign, id }) => {
   const [size, setSize] = useState('S');
-  const [material, setMaterial] = useState('Nazik');
+  const [material, setMaterial] = useState('Nazik'); 
   const navigate = useNavigate();
   const sizes = ['S', 'M', 'L', 'XL', '2XL'];
   const materials = ['Nazik', 'Qalın'];
@@ -161,5 +161,5 @@ const ManageFiles = ({ frontContent, backContent, setColor, product, downloadDes
     </div>
   );
 };
-
+ 
 export default ManageFiles;

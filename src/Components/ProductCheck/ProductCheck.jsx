@@ -164,6 +164,6 @@ const ProductCheck = () => {
       </div>
     </div>
   );
-};
+}; 
 
 export default ProductCheck;
