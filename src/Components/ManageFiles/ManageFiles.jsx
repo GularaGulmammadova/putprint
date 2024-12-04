@@ -101,7 +101,7 @@ const ManageFiles = ({ frontContent, backContent, setColor, product, downloadDes
       </div>
 
       <div className={styles.picker}>
-        <h2 className={styles.heading}>Oversize T-shirt</h2>
+        <h2 className={styles.heading}>{product.name}</h2>
         <hr className={styles.hr} />
         {product.name !== "Eko Çanta" && (
           <>

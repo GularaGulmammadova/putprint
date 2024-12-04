@@ -131,7 +131,7 @@ const ProductCheck = () => {
             <div className="check-box-info">
               <div className="prices-title">Qiyməti</div>
               <div className="product-prices">
-                {data.material==='NAZIK' ? product?.price_thin : product?.price_thick} ×
+                {data.material==='nazik' ? product?.price_thin : product?.price_thick} ×
                 <input
                   type="number"
                   value={quantity}
@@ -140,7 +140,7 @@ const ProductCheck = () => {
                   min="1"
                 />
                 <div className="product-totally-price">
-                  {(data.material==='NAZIK' ? product?.price_thin : product?.price_thick)* quantity} ₼
+                  {(data.material==='nazik' ? product?.price_thin : product?.price_thick)* quantity} ₼
                 </div>
               </div>
             </div>

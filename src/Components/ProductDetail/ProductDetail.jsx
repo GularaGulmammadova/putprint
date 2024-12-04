@@ -13,6 +13,7 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [activeSize, setActiveSize] = useState("");
   const [activeThreads, setActiveThreads] = useState("");
+  const [displayPrice, setDisplayPrice] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -35,6 +36,12 @@ const ProductDetail = () => {
             ? productData.colors[0].color
             : ""
         );
+
+        if (productData.id === 3 || productData.id === 4) {
+          setDisplayPrice(productData.price_display);
+        } else {
+          setDisplayPrice(productData.price);
+        }
       } catch (error) {
         setError("Məhsulu yükləyərkən xəta baş verdi.");
         console.error("Error fetching product:", error);
@@ -56,11 +63,9 @@ const ProductDetail = () => {
         (c) => c.color === color
       );
 
-      // Seçilmiş rəngin şəkili varsa, onu göstəririk
       if (selectedProductColor && selectedProductColor.image) {
         setMainImage(selectedProductColor.image);
       } else {
-        // Əgər rəng üçün şəkil yoxdursa, əsas şəkili göstəririk
         setMainImage(product.images.main);
       }
     }
@@ -72,6 +77,14 @@ const ProductDetail = () => {
 
   const handleThreadsClick = (threads) => {
     setActiveThreads(threads);
+
+    if (product.id === 3 || product.id === 4) {
+      if (threads === "qalın") {
+        setDisplayPrice(product.price_thick + "₼");
+      } else if (threads === "nazik") {
+        setDisplayPrice(product.price_thin + "₼");
+      }
+    }
   };
 
   if (error) {
@@ -167,7 +180,7 @@ const ProductDetail = () => {
               <div className="threads-variants">
                 <p>Material</p>
                 <div className="threads">
-                  {product.threads.split(",").map((threads) => (
+                  {["nazik", "qalın"].map((threads) => (
                     <button
                       key={threads}
                       className={`threads-box ${
@@ -200,7 +213,7 @@ const ProductDetail = () => {
               </div>
             )}
             <div className="product-price">
-              <span>{product.price_display}</span>
+              <span>{displayPrice}</span>
               {product.id >= 7 && product.id <= 14 ? (
                 <Link to={`/productcheck/${product.id}`}>
                   <button className="order-button">Sifariş et</button>

@@ -102,8 +102,9 @@
   font-weight: 500;
 }
 
-.check-boxes-options {
+.check-boxes-option {
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
